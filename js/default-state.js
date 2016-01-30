@@ -8,14 +8,20 @@ DefaultState.prototype = Object.create(Phaser.State.prototype);
 DefaultState.prototype.constructor = DefaultState;
 
 DefaultState.prototype.create = function create() {
+  this.isoGroup = this.game.add.group();
+
   Phaser.State.prototype.create.call(this);
 
-  this.game.add.image(0, 0, 'bkg');
+  //this.game.add.image(0, 0, 'bkg');
 
   this.demon = new Demon(this.game, 20, 20);
   this.game.world.add(this.demon);
 
+  this.isoGroup.add(this.demon)
+
   this.symbol = new RitualSymbol(this.game, this.symbolId);
+
+  this.isoGroup.add(this.symbol);
 
   this.hintTrail = new ParticleTrail(this.game, 20, 20);
   this.game.world.add(this.hintTrail); this.hintTrail.begin();
@@ -24,7 +30,9 @@ DefaultState.prototype.create = function create() {
   this.door = game.add.sprite(80, 0, 'door_vert', 0);
   this.door.alpha = 0.5;
   this.door.open = false;
-  this.game.physics.arcade.enable(this.door);  
+  this.game.physics.arcade.enable(this.door);
+
+  this.isoGroup.sort();
 };
 
 DefaultState.prototype.update = function update() {
@@ -60,4 +68,6 @@ DefaultState.prototype.update = function update() {
         _this.game.state.start('default1');
     });
   }
+
+  this.isoGroup.sort('y', Phaser.Group.SORT_ASCENDING);
 };
