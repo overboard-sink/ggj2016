@@ -40,6 +40,8 @@ DefaultState.prototype.create = function create() {
 
   this.isoGroup.add(this.testMonk);
 
+  this.testMonk = new MonkWalking(this.game, 120, 120);
+  this.game.world.add(this.testMonk);
 };
 
 DefaultState.prototype.update = function update() {
@@ -91,7 +93,6 @@ var DRAW_DEBUG_BOXES = false;
 DefaultState.prototype.render = function render() {
   Phaser.State.prototype.render.call(this);
 
-  // KEEP ME
   if (DRAW_DEBUG_BOXES) {
 
     game.debug.text('Demon z-depth: ' + this.demon.z + ' ... Demon y-value: ' + this.demon.y, 10, 20);

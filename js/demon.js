@@ -1,7 +1,7 @@
 // jscs:disable
 
 var Demon = function Demon(game, x, y) {
-  Phaser.Sprite.call(this, game, x, y, 'demon', 0);
+  BaseSprite.call(this, game, x, y, 'demon', 0);
   this.animations.add('down', [0], 0);
   this.animations.add('left', [2], 0);
   this.animations.add('right', [3], 0);
@@ -22,7 +22,7 @@ Demon.preload = function preload(game) {
   );
 };
 
-Demon.prototype = Object.create(Phaser.Sprite.prototype);
+Demon.prototype = Object.create(BaseSprite.prototype);
 
 Demon.prototype.constructor = Demon;
 
@@ -32,20 +32,5 @@ Demon.prototype.update = function () {
   // movement
   this.game.physics.arcade.moveToPointer(this, 200);
 
-  // animation
-  var vel = this.body.velocity;
-  var anim = this.animations;
-  if (Math.abs(vel.x) > Math.abs(vel.y)) {
-    if (vel.x > 0) {
-      anim.play('right');
-    } else if (vel.x < 0) {
-      anim.play('left');
-    }
-  } else if (Math.abs(vel.x) < Math.abs(vel.y)) {
-    if (vel.y > 0) {
-      anim.play('down');
-    } else if (vel.y < 0) {
-      anim.play('up');
-    }
-  }
+  this.faceVelocity();
 }

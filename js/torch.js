@@ -3,7 +3,7 @@ var TORCH_EXPLOSION = 'TORCH_EXPLOSION';
 var TORCH_ON = 'TORCH_ON';
 
 var Torch = function Torch(game, x, y) {
-  Phaser.Sprite.call(this, game, x, y, 'torch', 0);
+  BaseSprite.call(this, game, x, y, 'torch', 0);
 
   this.setupAnimations();
 
@@ -29,7 +29,7 @@ Torch.preload = function preload(game) {
   );
 };
 
-Torch.prototype = Object.create(Phaser.Sprite.prototype);
+Torch.prototype = Object.create(BaseSprite.prototype);
 
 Torch.prototype.constructor = Torch;
 
@@ -52,7 +52,7 @@ Torch.prototype.setupAnimations = function setupAnimations() {
 };
 
 Torch.prototype.update = function update() {
-  Phaser.Sprite.prototype.update.call(this);
+  BaseSprite.prototype.update.call(this);
 };
 
 Torch.prototype.light = function light() {
