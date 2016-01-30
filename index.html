@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -13,7 +13,8 @@
         background-color: #000000;
       }
     </style>
-
+    <script type="text/javascript" src="/js/torch.js"></script>
+    <script type="text/javascript" src="/js/symbol.js"></script>
   </head>
   <body>
     <main id="main"></main>
@@ -27,42 +28,21 @@
       });
 
       var demon;
-      var torches;
-      var overlay;
+      var symbol;
       var door;
 
       function preload() {
         Demon.preload(game);
-
-        game.load.image('overlay', '/img/overlay.png');
+        Torch.preload(game);
+        RitualSymbol.preload(game);
         game.load.image('door_vert', '/img/door_vert.png');
-        game.load.spritesheet('torch', '/img/torch.png', 32, 32);
       }
 
       function create() {
         demon = new Demon(game, 20, 20);
         game.world.add(demon);
 
-        torches = game.add.group();
-        game.physics.arcade.enable(torches);
-
-        var torch = game.add.sprite(100, 100, 'torch', 0);
-        game.physics.arcade.enable(torch);
-        torches.add(torch);
-        torch.lit = false;
-
-        torch = game.add.sprite(200, 100, 'torch', 0);
-        game.physics.arcade.enable(torch);
-        torches.add(torch);
-        torch.lit = false;
-
-        torch = game.add.sprite(150, 200, 'torch', 0);
-        game.physics.arcade.enable(torch);
-        torches.add(torch);
-        torch.lit = false;
-
-        overlay = game.add.sprite(100, 100, 'overlay', 0);
-        overlay.visible = false;
+        symbol = new RitualSymbol(game, 1);
 
         door = game.add.sprite(80, 0, 'door_vert', 0);
         door.alpha = 0.5;
@@ -72,42 +52,14 @@
 
       function update() {
 
-        // movement
-        game.physics.arcade.moveToPointer(demon, 200);
-
-        // animation
-        var vel = demon.body.velocity;
-        var anim = demon.animations;
-        if (Math.abs(vel.x) > Math.abs(vel.y)) {
-          if (vel.x > 0) {
-            anim.play('right');
-          } else if (vel.x < 0) {
-            anim.play('left');
-          }
-        } else if (Math.abs(vel.x) < Math.abs(vel.y)) {
-          if (vel.y > 0) {
-            anim.play('down');
-          } else if (vel.y < 0) {
-            anim.play('up');
-          }
-        }
-
         // touching torches
-        game.physics.arcade.overlap(demon, torches, function (a, b) {
-          b.frame = 1;
-          b.lit = true;
+        game.physics.arcade.overlap(demon, symbol, function (a, b) {
+          b.light();
         });
 
-        // task complete
-        overlay.visible = true;
-        door.alpha = 1.0;
-        door.open = true;
-        for (var i = 0; i < torches.children.length; i++) {
-          if (!torches.children[i].lit) {
-            overlay.visible = false;
-            door.alpha = 0.5;
-            door.open = false;
-          }
+        if (symbol.isComplete()) {
+          door.open = true;
+          door.alpha = 1.0;
         }
 
         // exit room
