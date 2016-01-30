@@ -13,66 +13,33 @@
         background-color: #000000;
       }
     </style>
+
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/default-state.js"></script>
     <script type="text/javascript" src="/js/torch.js"></script>
     <script type="text/javascript" src="/js/symbol.js"></script>
     <script type="text/javascript" src="/js/particle-trail.js"></script>
 
   </head>
   <body>
+
+    <!-- canvas -->
     <main id="main"></main>
+
     <script type="text/javascript">
-
-
       var game = new Phaser.Game(640, 1120, Phaser.AUTO, 'main', {
-        preload: preload,
-        create: create,
-        update: update
+        preload: function preload() {
+          Demon.preload(game);
+          ParticleTrail.preload(game);
+          Torch.preload(game);
+          RitualSymbol.preload(game);
+          game.load.image('door_vert', '/img/door_vert.png');
+        },
+        create: function create() {
+          game.state.add('default', new DefaultState());
+          game.state.start('default');
+        },
       });
-
-      var demon;
-      var symbol;
-      var door;
-
-      function preload() {
-        Demon.preload(game);
-        ParticleTrail.preload(game);
-        Torch.preload(game);
-        RitualSymbol.preload(game);
-        game.load.image('door_vert', '/img/door_vert.png');
-      }
-
-      function create() {
-        demon = new Demon(game, 20, 20);
-        game.world.add(demon);
-
-        symbol = new RitualSymbol(game, 1);
-
-        door = game.add.sprite(80, 0, 'door_vert', 0);
-        door.alpha = 0.5;
-        door.open = false;
-        game.physics.arcade.enable(door);
-      }
-
-      function update() {
-
-
-        // touching torches
-        game.physics.arcade.overlap(demon, symbol, function (a, b) {
-          b.light();
-        });
-
-        if (symbol.isComplete()) {
-          door.open = true;
-          door.alpha = 1.0;
-        }
-
-        // exit room
-        if (door.open) {
-          game.physics.arcade.overlap(demon, door, function (a, b) {
-            console.log('you left');
-          });
-        }
-      }
     </script>
   </body>
 </html>

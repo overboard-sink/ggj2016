@@ -1,3 +1,5 @@
+// jscs:disable
+
 var Demon = function Demon(game, x, y) {
   Phaser.Sprite.call(this, game, x, y, 'demon', 0);
   this.anchor.setTo(.5, .5);

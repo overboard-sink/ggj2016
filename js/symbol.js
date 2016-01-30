@@ -1,6 +1,8 @@
-﻿RitualSymbol = function (game, symbolId) {
+// jscs:disable
+
+RitualSymbol = function (game, symbolId) {
     Phaser.Group.call(this, game);
-    
+
     var coords = [];
     var overlayCoords = {};
 
@@ -41,7 +43,7 @@ RitualSymbol.preload = function (game) {
 
 RitualSymbol.prototype.update = function () {
     Phaser.Group.prototype.update.call(this);
-    
+
     if (this.isComplete()) {
         this.overlay.visible = true;
     }
@@ -49,7 +51,7 @@ RitualSymbol.prototype.update = function () {
 
 RitualSymbol.prototype.isComplete = function () {
     for (var i = 0; i < this.children.length; i++) {
-        if (!symbol.children[i].lit) {
+        if (!this.children[i].lit) {
             return false;
         }
     }
