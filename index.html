@@ -26,20 +26,6 @@
     <!-- canvas -->
     <main id="main"></main>
 
-    <script type="text/javascript">
-      var game = new Phaser.Game(640, 1120, Phaser.AUTO, 'main', {
-        preload: function preload() {
-          Demon.preload(game);
-          ParticleTrail.preload(game);
-          Torch.preload(game);
-          RitualSymbol.preload(game);
-          game.load.image('door_vert', '/img/door_vert.png');
-        },
-        create: function create() {
-          game.state.add('default', new DefaultState());
-          game.state.start('default');
-        },
-      });
-    </script>
+    <script type="text/javascript">main();</script>
   </body>
 </html>
