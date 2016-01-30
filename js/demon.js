@@ -14,8 +14,8 @@ Demon.preload = function preload(game) {
   game.load.spritesheet(
     'demon',
     '/img/demon_4facing.png',
-    TILE_W * 1,
-    TILE_H * 1
+    TILE_W * 2,
+    TILE_H * 2
   );
 };
 

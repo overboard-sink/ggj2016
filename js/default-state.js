@@ -24,7 +24,7 @@ DefaultState.prototype.create = function create() {
   this.door = game.add.sprite(80, 0, 'door_vert', 0);
   this.door.alpha = 0.5;
   this.door.open = false;
-  this.game.physics.arcade.enable(this.door);  
+  this.game.physics.arcade.enable(this.door);
 };
 
 DefaultState.prototype.update = function update() {
