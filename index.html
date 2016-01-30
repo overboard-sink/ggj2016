@@ -2,9 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Demon Torch</title>
     <script type="text/javascript" src="/js/phaser.min.js"></script>
     <script type="text/javascript" src="/js/demon.js"></script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        background-color: #000000;
+      }
+    </style>
     <script type="text/javascript" src="/js/torch.js"></script>
     <script type="text/javascript" src="/js/symbol.js"></script>
     <script type="text/javascript" src="/js/particle-trail.js"></script>
@@ -36,7 +44,7 @@
       function create() {
         demon = new Demon(game, 20, 20);
         game.world.add(demon);
-        
+
         symbol = new RitualSymbol(game, 1);
 
         door = game.add.sprite(80, 0, 'door_vert', 0);
@@ -52,7 +60,7 @@
         game.physics.arcade.overlap(demon, symbol, function (a, b) {
           b.light();
         });
-        
+
         if (symbol.isComplete()) {
           door.open = true;
           door.alpha = 1.0;
