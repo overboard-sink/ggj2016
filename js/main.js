@@ -2,6 +2,9 @@ var GAME_WIDTH = 640;
 var GAME_HEIGHT = 1120;
 var GAME_MAIN_ID = 'main';
 
+var TILE_W = 128;
+var TILE_H = 128;
+
 /**
  * Global containing the Phaser.Game object
  */
