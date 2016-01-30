@@ -9,6 +9,9 @@ DefaultState.prototype.constructor = DefaultState;
 
 DefaultState.prototype.create = function create() {
   Phaser.State.prototype.create.call(this);
+
+  this.game.add.image(0, 0, 'bkg');
+
   this.demon = new Demon(this.game, 20, 20);
   this.game.world.add(this.demon);
 
@@ -36,7 +39,7 @@ DefaultState.prototype.update = function update() {
   // exit room
   if (this.door.open) {
     var _this = this;
-    this.game.physics.arcade.overlap(this.demon, this.door, function (a, b) {
+    this.game.physics.arcade.overlap(this.demon, this.door, function(a, b) {
       if (Math.random() > .5)
         _this.game.state.start('default0');
       else

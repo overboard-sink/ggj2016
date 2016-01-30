@@ -13,11 +13,16 @@ var game;
 function main() {
   game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, GAME_MAIN_ID, {
     preload: function preload() {
+
+      // Object-specific assets
       Demon.preload(game);
       ParticleTrail.preload(game);
       Torch.preload(game);
       RitualSymbol.preload(game);
+
+      // Other assets
       game.load.image('door_vert', '/img/door_vert.png');
+      game.load.image('bkg', '/img/floor_full.png');
     },
 
     create: function create() {
