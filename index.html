@@ -6,6 +6,7 @@
     <script type="text/javascript" src="/js/phaser.min.js"></script>
     <script type="text/javascript" src="/js/demon.js"></script>
     <script type="text/javascript" src="/js/torch.js"></script>
+    <script type="text/javascript" src="/js/symbol.js"></script>
 
   </head>
   <body>
@@ -20,35 +21,21 @@
       });
 
       var demon;
-      var torches;
-      var overlay;
+      var symbol;
       var door;
 
       function preload() {
         Demon.preload(game);
         Torch.preload(game);
-        game.load.image('overlay', '/img/overlay.png');
+        RitualSymbol.preload(game);
         game.load.image('door_vert', '/img/door_vert.png');
       }
 
       function create() {
         demon = new Demon(game, 20, 20);
         game.world.add(demon);
-
-        torches = game.add.group();
-        game.physics.arcade.enable(torches);
-
-        var torch = new Torch(game, 100, 100);
-        torches.add(torch);        
-
-        torch = new Torch(game, 200, 100);        
-        torches.add(torch);
-
-        torch = new Torch(game, 150, 200);        
-        torches.add(torch);        
-
-        overlay = game.add.sprite(100, 100, 'overlay', 0);
-        overlay.visible = false;
+        
+        symbol = new RitualSymbol(game, 1);
 
         door = game.add.sprite(80, 0, 'door_vert', 0);
         door.alpha = 0.5;
@@ -59,20 +46,13 @@
       function update() {
 
         // touching torches
-        game.physics.arcade.overlap(demon, torches, function (a, b) {
+        game.physics.arcade.overlap(demon, symbol, function (a, b) {
           b.light();
         });
-
-        // task complete
-        overlay.visible = true;
-        door.alpha = 1.0;
-        door.open = true;
-        for (var i = 0; i < torches.children.length; i++) {
-          if (!torches.children[i].lit) {
-            overlay.visible = false;
-            door.alpha = 0.5;
-            door.open = false;
-          }
+        
+        if (symbol.isComplete()) {
+          door.open = true;
+          door.alpha = 1.0;
         }
 
         // exit room
