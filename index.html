@@ -7,6 +7,7 @@
     <script type="text/javascript" src="/js/demon.js"></script>
     <script type="text/javascript" src="/js/torch.js"></script>
     <script type="text/javascript" src="/js/symbol.js"></script>
+    <script type="text/javascript" src="/js/particle-trail.js"></script>
 
   </head>
   <body>
@@ -26,6 +27,7 @@
 
       function preload() {
         Demon.preload(game);
+        ParticleTrail.preload(game);
         Torch.preload(game);
         RitualSymbol.preload(game);
         game.load.image('door_vert', '/img/door_vert.png');
@@ -44,6 +46,7 @@
       }
 
       function update() {
+
 
         // touching torches
         game.physics.arcade.overlap(demon, symbol, function (a, b) {
