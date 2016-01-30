@@ -1,5 +1,6 @@
-var DefaultState = function DefaultState() {
+var DefaultState = function DefaultState(symbolId) {
   Phaser.State.call(this);
+  this.symbolId = symbolId;
 };
 
 DefaultState.prototype = Object.create(Phaser.State.prototype);
@@ -11,7 +12,7 @@ DefaultState.prototype.create = function create() {
   this.demon = new Demon(this.game, 20, 20);
   this.game.world.add(this.demon);
 
-  this.symbol = new RitualSymbol(this.game, 1);
+  this.symbol = new RitualSymbol(this.game, this.symbolId);
 
   this.door = game.add.sprite(80, 0, 'door_vert', 0);
   this.door.alpha = 0.5;
@@ -34,8 +35,12 @@ DefaultState.prototype.update = function update() {
 
   // exit room
   if (this.door.open) {
-    this.game.physics.arcade.overlap(this.demon, this.door, function(a, b) {
-      console.log('you left');
+    var _this = this;
+    this.game.physics.arcade.overlap(this.demon, this.door, function (a, b) {
+      if (Math.random() > .5)
+        _this.game.state.start('default0');
+      else
+        _this.game.state.start('default1');
     });
   }
 };

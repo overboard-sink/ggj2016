@@ -21,8 +21,9 @@ function main() {
     },
 
     create: function create() {
-      game.state.add('default', new DefaultState());
-      game.state.start('default');
+      game.state.add('default0', new DefaultState(0));
+      game.state.add('default1', new DefaultState(1));
+      game.state.start('default0');
     },
   });
 }

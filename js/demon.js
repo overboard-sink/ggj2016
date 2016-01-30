@@ -21,25 +21,25 @@ Demon.prototype = Object.create(Phaser.Sprite.prototype, {
 
 
 Demon.prototype.update = function () {
-    Phaser.Sprite.prototype.update.call(this);
+  Phaser.Sprite.prototype.update.call(this);
 
-    // movement
-    this.game.physics.arcade.moveToPointer(this, 200);
+  // movement
+  this.game.physics.arcade.moveToPointer(this, 200);
 
-    // animation
-    var vel = this.body.velocity;
-    var anim = this.animations;
-    if (Math.abs(vel.x) > Math.abs(vel.y)) {
-        if (vel.x > 0) {
-            anim.play('right');
-        } else if (vel.x < 0) {
-            anim.play('left');
-        }
-    } else if (Math.abs(vel.x) < Math.abs(vel.y)) {
-        if (vel.y > 0) {
-            anim.play('down');
-        } else if (vel.y < 0) {
-            anim.play('up');
-        }
+  // animation
+  var vel = this.body.velocity;
+  var anim = this.animations;
+  if (Math.abs(vel.x) > Math.abs(vel.y)) {
+    if (vel.x > 0) {
+      anim.play('right');
+    } else if (vel.x < 0) {
+      anim.play('left');
     }
+  } else if (Math.abs(vel.x) < Math.abs(vel.y)) {
+    if (vel.y > 0) {
+      anim.play('down');
+    } else if (vel.y < 0) {
+      anim.play('up');
+    }
+  }
 }
