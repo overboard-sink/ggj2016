@@ -22,10 +22,9 @@ Demon.preload = function preload(game) {
   );
 };
 
-Demon.prototype = Object.create(Phaser.Sprite.prototype, {
-  constructor: Demon,
-});
+Demon.prototype = Object.create(Phaser.Sprite.prototype);
 
+Demon.prototype.constructor = Demon;
 
 Demon.prototype.update = function () {
   Phaser.Sprite.prototype.update.call(this);
