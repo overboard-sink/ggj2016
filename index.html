@@ -17,21 +17,27 @@
         update: update
       });
 
-      var testSpr;
+      var demon;
       var torches;
       var overlay;
       var door;
 
       function preload() {
-        game.load.image('test', '/img/test.png');
+        game.load.spritesheet('demon', '/img/demon_4facing.png', 64, 64);
         game.load.image('overlay', '/img/overlay.png');
         game.load.image('door_vert', '/img/door_vert.png');
         game.load.spritesheet('torch', '/img/torch.png', 32, 32);
       }
 
       function create() {
-        testSpr = game.add.sprite(20, 20, 'test', 0);
-        game.physics.arcade.enable(testSpr);
+        demon = game.add.sprite(20, 20, 'demon', 0);
+        demon.anchor.setTo(.5, .5);
+        demon.animations.add('down', [0], 0);
+        demon.animations.add('left', [1], 0);
+        demon.animations.add('right', [2], 0);
+        demon.animations.add('up', [3], 0);
+        game.physics.arcade.enable(demon);
+
         torches = game.add.group();
         game.physics.arcade.enable(torches);
 
@@ -61,13 +67,33 @@
 
       function update() {
 
-        game.physics.arcade.moveToPointer(testSpr, 200);
+        // movement
+        game.physics.arcade.moveToPointer(demon, 200);
 
-        game.physics.arcade.overlap(testSpr, torches, function (a, b) {
+        // animation
+        var vel = demon.body.velocity;
+        var anim = demon.animations;
+        if (Math.abs(vel.x) > Math.abs(vel.y)) {
+          if (vel.x > 0) {
+            anim.play('right');
+          } else if (vel.x < 0) {
+            anim.play('left');
+          }
+        } else if (Math.abs(vel.x) < Math.abs(vel.y)) {
+          if (vel.y > 0) {
+            anim.play('down');
+          } else if (vel.y < 0) {
+            anim.play('up');
+          }
+        }
+
+        // touching torches
+        game.physics.arcade.overlap(demon, torches, function (a, b) {
           b.frame = 1;
           b.lit = true;
         });
 
+        // task complete
         overlay.visible = true;
         door.alpha = 1.0;
         door.open = true;
@@ -79,9 +105,10 @@
           }
         }
 
+        // exit room
         if (door.open) {
-          game.physics.arcade.overlap(testSpr, door, function (a, b) {
-              console.log('you left')
+          game.physics.arcade.overlap(demon, door, function (a, b) {
+            console.log('you left');
           });
         }
       }
