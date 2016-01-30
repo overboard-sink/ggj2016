@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Demon Torch</title>
     <script type="text/javascript" src="/js/phaser.min.js"></script>
+    <script type="text/javascript" src="/js/demon.js"></script>
 
   </head>
   <body>
@@ -23,20 +24,16 @@
       var door;
 
       function preload() {
-        game.load.spritesheet('demon', '/img/demon_4facing.png', 64, 64);
+        Demon.preload(game);
+
         game.load.image('overlay', '/img/overlay.png');
         game.load.image('door_vert', '/img/door_vert.png');
         game.load.spritesheet('torch', '/img/torch.png', 32, 32);
       }
 
       function create() {
-        demon = game.add.sprite(20, 20, 'demon', 0);
-        demon.anchor.setTo(.5, .5);
-        demon.animations.add('down', [0], 0);
-        demon.animations.add('left', [1], 0);
-        demon.animations.add('right', [2], 0);
-        demon.animations.add('up', [3], 0);
-        game.physics.arcade.enable(demon);
+        demon = new Demon(game, 20, 20);
+        game.world.add(demon);
 
         torches = game.add.group();
         game.physics.arcade.enable(torches);
