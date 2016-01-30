@@ -17,18 +17,30 @@ DefaultState.prototype.create = function create() {
 
   this.symbol = new RitualSymbol(this.game, this.symbolId);
 
+  this.hintTrail = new ParticleTrail(this.game, 20, 20);
+  this.game.world.add(this.hintTrail); this.hintTrail.begin();
+  this.hintTrail.setTarget(this.symbol.children[0]);
+
   this.door = game.add.sprite(80, 0, 'door_vert', 0);
   this.door.alpha = 0.5;
   this.door.open = false;
-  this.game.physics.arcade.enable(this.door);
+  this.game.physics.arcade.enable(this.door);  
 };
 
 DefaultState.prototype.update = function update() {
   Phaser.State.prototype.update.call(this);
 
+  var _this = this;
   // touching torches
   this.game.physics.arcade.overlap(this.demon, this.symbol, function(a, b) {
     b.light();
+    if (b.nextTorch) {
+      _this.hintTrail.x = b.x;
+      _this.hintTrail.y = b.y;
+      _this.hintTrail.setTarget(b.nextTorch);
+      _this.hintTrail.end();
+      _this.hintTrail.begin();
+    }
   });
 
   if (this.symbol.isComplete()) {
