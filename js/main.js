@@ -2,8 +2,8 @@ var GAME_WIDTH = 640;
 var GAME_HEIGHT = 1120;
 var GAME_MAIN_ID = 'main';
 
-var TILE_W = 128;
-var TILE_H = 128;
+var TILE_W = 64;
+var TILE_H = 64;
 
 /**
  * Global containing the Phaser.Game object
@@ -22,6 +22,7 @@ function main() {
       ParticleTrail.preload(game);
       Torch.preload(game);
       RitualSymbol.preload(game);
+      MonkBase.preload(game);
 
       // Other assets
       game.load.image('door_vert', '/img/door_vert.png');

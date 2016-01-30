@@ -1,3 +1,5 @@
+// jscs:disable
+
 var DefaultState = function DefaultState(symbolId) {
   Phaser.State.call(this);
   this.symbolId = symbolId;
@@ -33,6 +35,10 @@ DefaultState.prototype.create = function create() {
   this.game.physics.arcade.enable(this.door);
 
   this.isoGroup.sort();
+
+  this.testMonk = new MonkA(this.game, 120, 120);
+  this.game.world.add(this.testMonk);
+
 };
 
 DefaultState.prototype.update = function update() {
@@ -70,4 +76,19 @@ DefaultState.prototype.update = function update() {
   }
 
   this.isoGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+};
+
+var DRAW_DEBUG_BOXES = false;
+
+DefaultState.prototype.render = function render() {
+  Phaser.State.prototype.render.call(this);
+
+  // KEEP ME
+  if (DRAW_DEBUG_BOXES) {
+    this.game.debug.body(this.demon);
+    this.symbol.children.forEach(function(child) {
+      child &&
+      this.game.debug.body(child);
+    });
+  }
 };
