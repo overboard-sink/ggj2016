@@ -1,7 +1,7 @@
 var ParticleTrail = function ParticleTrail(game, x, y) {
   Phaser.Sprite.call(this, game, x, y, 'particle', 0);
 
-  this.emitter = this.game.add.emitter(0, 0, 50);
+  this.emitter = this.game.add.emitter(TILE_W / 2, TILE_H / 2, 50);
 
   this.emitter.makeParticles('particle');
 

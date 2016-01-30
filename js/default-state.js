@@ -32,14 +32,16 @@ DefaultState.prototype.update = function update() {
 
   var _this = this;
   // touching torches
-  this.game.physics.arcade.overlap(this.demon, this.symbol, function(a, b) {
-    b.light();
-    if (b.nextTorch) {
-      _this.hintTrail.x = b.x;
-      _this.hintTrail.y = b.y;
-      _this.hintTrail.setTarget(b.nextTorch);
-      _this.hintTrail.end();
-      _this.hintTrail.begin();
+  this.game.physics.arcade.overlap(this.demon, this.symbol, function (a, b) {
+    if (!b.lit && (b.prevTorch == undefined || b.prevTorch.lit)) {
+      b.light();
+      if (b.nextTorch) {
+        _this.hintTrail.x = b.x;
+        _this.hintTrail.y = b.y;
+        _this.hintTrail.setTarget(b.nextTorch);
+        _this.hintTrail.end();
+        _this.hintTrail.begin();
+      }
     }
   });
 
