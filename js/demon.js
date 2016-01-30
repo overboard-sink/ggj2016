@@ -11,12 +11,16 @@ var Demon = function Demon(game, x, y) {
 };
 
 Demon.preload = function preload(game) {
-  game.load.spritesheet('demon', '/img/demon_4facing.png', 64, 64);
+  game.load.spritesheet(
+    'demon',
+    '/img/demon_4facing.png',
+    TILE_W * 1,
+    TILE_H * 1
+  );
 };
 
 Demon.prototype = Object.create(Phaser.Sprite.prototype, {
   constructor: Demon,
-
 });
 
 
