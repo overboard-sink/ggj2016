@@ -29,7 +29,7 @@ DefaultState.prototype.create = function create() {
   this.game.physics.arcade.enable(this.door);
 
 
-  this.testMonk = new MonkA(this.game, 120, 120);
+  this.testMonk = new MonkWalking(this.game, 120, 120);
   this.game.world.add(this.testMonk);
 };
 
@@ -73,7 +73,6 @@ var DRAW_DEBUG_BOXES = false;
 DefaultState.prototype.render = function render() {
   Phaser.State.prototype.render.call(this);
 
-  // KEEP ME
   if (DRAW_DEBUG_BOXES) {
     this.game.debug.body(this.demon);
     this.symbol.children.forEach(function(child) {

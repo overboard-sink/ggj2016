@@ -1,5 +1,5 @@
 var MonkBase = function MonkBase(game, x, y, key, frame) {
-  Phaser.Sprite.call(this, game, x, y, key, frame);
+  BaseSprite.call(this, game, x, y, key, frame);
 
   this.setupAnimations();
 
@@ -13,7 +13,7 @@ MonkBase.preload = function preload(game) {
   game.load.spritesheet('monk', '/img/monk_walk.png', TILE_W, TILE_H);
 };
 
-MonkBase.prototype = Object.create(Phaser.Sprite.prototype);
+MonkBase.prototype = Object.create(BaseSprite.prototype);
 
 MonkBase.prototype.constructor = MonkBase;
 
