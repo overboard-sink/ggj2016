@@ -1,8 +1,8 @@
 ﻿// jscs:disable
 
 RitualSymbol = function (game, symbolId) {
-  Phaser.Group.call(this, game);
-
+  this.game = game;
+  this.children = [];
   var coords = [];
   var overlayCoords = {};
 
@@ -34,14 +34,10 @@ RitualSymbol = function (game, symbolId) {
       prevTorch.nextTorch = torch;
     }
 
-    this.add(torch);
+    this.children.push(torch);
     prevTorch = torch;
   }
-
-  this.game.physics.arcade.enable(this);
 };
-RitualSymbol.prototype = Object.create(Phaser.Group.prototype);
-RitualSymbol.prototype.constructor = RitualSymbol;
 
 RitualSymbol.preload = function (game) {
   game.load.image('overlay-0', '/img/overlay.png');
@@ -49,8 +45,6 @@ RitualSymbol.preload = function (game) {
 }
 
 RitualSymbol.prototype.update = function () {
-  Phaser.Group.prototype.update.call(this);
-
   if (this.isComplete()) {
     this.overlay.visible = true;
   }

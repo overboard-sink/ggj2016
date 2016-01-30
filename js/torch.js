@@ -12,7 +12,7 @@ var Torch = function Torch(game, x, y) {
 
   this.lit = false;
 
-  this.emitter = this.game.add.emitter(16, 0, 50);
+  this.emitter = this.game.add.emitter(TILE_W + 7, 55, 50);
   this.emitter.makeParticles('particle');
   this.addChild(this.emitter);
   this.emitter.minParticleSpeed.setTo(-15, -20);
