@@ -68,13 +68,17 @@ DefaultState.prototype.update = function update() {
   }
 };
 
+var DRAW_DEBUG_BOXES = false;
+
 DefaultState.prototype.render = function render() {
   Phaser.State.prototype.render.call(this);
 
   // KEEP ME
-  this.game.debug.body(this.demon);
-  this.symbol.children.forEach(function(child) {
-    child &&
+  if (DRAW_DEBUG_BOXES) {
+    this.game.debug.body(this.demon);
+    this.symbol.children.forEach(function(child) {
+      child &&
       this.game.debug.body(child);
-  });
+    });
+  }
 };
