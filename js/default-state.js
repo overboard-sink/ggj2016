@@ -29,7 +29,7 @@ DefaultState.prototype.create = function create() {
   this.game.physics.arcade.enable(this.door);
 
 
-  this.testMonk = new MonkWalking(this.game, 120, 120);
+  this.testMonk = new MonkChasing(this.game, 120, 120);
   this.game.world.add(this.testMonk);
 };
 
