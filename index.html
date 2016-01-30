@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demon Torch</title>
+    <script type="text/javascript" src="/js/phaser.min.js"></script>
+
+  </head>
+  <body>
+    <main id="main"></main>
+    <script type="text/javascript">
+
+
+      var game = new Phaser.Game(640, 1120, Phaser.AUTO, 'main', {
+        preload: preload,
+        create: create,
+        update: update
+      });
+
+      var testSpr;
+      var torches;
+      var overlay;
+      var door;
+
+      function preload() {
+        game.load.image('test', '/img/test.png');
+        game.load.image('overlay', '/img/overlay.png');
+        game.load.image('door_vert', '/img/door_vert.png');
+        game.load.spritesheet('torch', '/img/torch.png', 32, 32);
+      }
+
+      function create() {
+        testSpr = game.add.sprite(20, 20, 'test', 0);
+        game.physics.arcade.enable(testSpr);
+        torches = game.add.group();
+        game.physics.arcade.enable(torches);
+
+        var torch = game.add.sprite(100, 100, 'torch', 0);
+        game.physics.arcade.enable(torch);
+        torches.add(torch);
+        torch.lit = false;
+
+        torch = game.add.sprite(200, 100, 'torch', 0);
+        game.physics.arcade.enable(torch);
+        torches.add(torch);
+        torch.lit = false;
+
+        torch = game.add.sprite(150, 200, 'torch', 0);
+        game.physics.arcade.enable(torch);
+        torches.add(torch);
+        torch.lit = false;
+
+        overlay = game.add.sprite(100, 100, 'overlay', 0);
+        overlay.visible = false;
+
+        door = game.add.sprite(80, 0, 'door_vert', 0);
+        door.alpha = 0.5;
+        door.open = false;
+        game.physics.arcade.enable(door);
+      }
+
+      function update() {
+
+        game.physics.arcade.moveToPointer(testSpr, 200);
+
+        game.physics.arcade.overlap(testSpr, torches, function (a, b) {
+          b.frame = 1;
+          b.lit = true;
+        });
+
+        overlay.visible = true;
+        door.alpha = 1.0;
+        door.open = true;
+        for (var i = 0; i < torches.children.length; i++) {
+          if (!torches.children[i].lit) {
+            overlay.visible = false;
+            door.alpha = 0.5;
+            door.open = false;
+          }
+        }
+
+        if (door.open) {
+          game.physics.arcade.overlap(testSpr, door, function (a, b) {
+              console.log('you left')
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
