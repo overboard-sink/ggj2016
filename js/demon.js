@@ -2,18 +2,21 @@
 
 var Demon = function Demon(game, x, y) {
   Phaser.Sprite.call(this, game, x, y, 'demon', 0);
-  this.anchor.setTo(.5, .5);
   this.animations.add('down', [0], 0);
-  this.animations.add('left', [1], 0);
-  this.animations.add('right', [2], 0);
-  this.animations.add('up', [3], 0);
+  this.animations.add('left', [2], 0);
+  this.animations.add('right', [3], 0);
+  this.animations.add('up', [1], 0);
+
+  this.anchor.setTo(.5, .5);
+
   game.physics.arcade.enable(this);
+  this.body.setSize(70, 75, 0, 27);
 };
 
 Demon.preload = function preload(game) {
   game.load.spritesheet(
     'demon',
-    '/img/demon_4facing.png',
+    '/img/demon_sheet.png',
     TILE_W * 2,
     TILE_H * 2
   );

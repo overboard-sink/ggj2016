@@ -1,3 +1,5 @@
+// jscs:disable
+
 var DefaultState = function DefaultState(symbolId) {
   Phaser.State.call(this);
   this.symbolId = symbolId;
@@ -60,4 +62,15 @@ DefaultState.prototype.update = function update() {
         _this.game.state.start('default1');
     });
   }
+};
+
+DefaultState.prototype.render = function render() {
+  Phaser.State.prototype.render.call(this);
+
+  // KEEP ME
+  // this.game.debug.body(this.demon);
+  // this.symbol.children.forEach(function(child) {
+  //   child &&
+  //     this.game.debug.body(child);
+  // });
 };
