@@ -27,6 +27,10 @@ DefaultState.prototype.create = function create() {
   this.door.alpha = 0.5;
   this.door.open = false;
   this.game.physics.arcade.enable(this.door);
+
+
+  this.testMonk = new MonkA(this.game, 120, 120);
+  this.game.world.add(this.testMonk);
 };
 
 DefaultState.prototype.update = function update() {

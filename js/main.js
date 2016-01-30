@@ -22,6 +22,7 @@ function main() {
       ParticleTrail.preload(game);
       Torch.preload(game);
       RitualSymbol.preload(game);
+      MonkBase.preload(game);
 
       // Other assets
       game.load.image('door_vert', '/img/door_vert.png');
