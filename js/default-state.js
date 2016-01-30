@@ -72,9 +72,9 @@ DefaultState.prototype.render = function render() {
   Phaser.State.prototype.render.call(this);
 
   // KEEP ME
-  // this.game.debug.body(this.demon);
-  // this.symbol.children.forEach(function(child) {
-  //   child &&
-  //     this.game.debug.body(child);
-  // });
+  this.game.debug.body(this.demon);
+  this.symbol.children.forEach(function(child) {
+    child &&
+      this.game.debug.body(child);
+  });
 };

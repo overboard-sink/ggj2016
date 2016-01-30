@@ -7,10 +7,10 @@ var Demon = function Demon(game, x, y) {
   this.animations.add('right', [3], 0);
   this.animations.add('up', [1], 0);
 
-  this.anchor.setTo(.5, .5);
+  this.anchor.setTo(.5, .75);
 
   game.physics.arcade.enable(this);
-  this.body.setSize(70, 75, 0, 27);
+  this.body.setSize(70, 75, 0, 20);
 };
 
 Demon.preload = function preload(game) {
