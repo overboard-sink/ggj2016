@@ -23,3 +23,9 @@ MonkBase.prototype.setupAnimations = function setupAnimations() {
   this.animations.add('up', [8, 9, 10, 11], 8, true);
   this.animations.add('right', [12, 13, 14, 15], 8, true);
 };
+
+MonkBase.prototype.update = function update() {
+  BaseSprite.prototype.update.call(this);
+
+  this.faceVelocity();
+};
