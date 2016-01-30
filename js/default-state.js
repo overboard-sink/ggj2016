@@ -51,8 +51,8 @@ DefaultState.prototype.update = function update() {
     if (!b.lit && (b.prevTorch == undefined || b.prevTorch.lit)) {
       b.light();
       if (b.nextTorch) {
-        _this.hintTrail.x = b.x;
-        _this.hintTrail.y = b.y;
+        _this.hintTrail.x = b.x + TILE_W;
+        _this.hintTrail.y = b.y + TILE_H * 2;
         _this.hintTrail.setTarget(b.nextTorch);
         _this.hintTrail.end();
         _this.hintTrail.begin();

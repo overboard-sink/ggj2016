@@ -1,7 +1,7 @@
 var ParticleTrail = function ParticleTrail(game, x, y) {
   Phaser.Sprite.call(this, game, x, y, 'particle', 0);
 
-  this.emitter = this.game.add.emitter(TILE_W / 2, TILE_H / 2, 50);
+  this.emitter = this.game.add.emitter(0, 0, 50);
 
   this.emitter.makeParticles('particle');
 
@@ -30,7 +30,7 @@ ParticleTrail.prototype.update = function () {
 };
 
 ParticleTrail.prototype.setTarget = function (target) {
-  this.rotation = this.game.physics.arcade.moveToObject(this, target, 0, 5000);
+  this.rotation = this.game.physics.arcade.moveToXY(this, target.x + (target.width / 2), target.y + (target.height / 2), 0, 5000);
 }
 
 ParticleTrail.prototype.begin = function () {
