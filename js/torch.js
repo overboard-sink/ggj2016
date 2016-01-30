@@ -8,15 +8,13 @@ var Torch = function Torch(game, x, y) {
   this.setupAnimations();
 
   this.game.physics.arcade.enable(this);
+  this.body.setSize(80, 50, 26, 212);
 
   this.lit = false;
 
   this.emitter = this.game.add.emitter(16, 0, 50);
-
   this.emitter.makeParticles('particle');
-
   this.addChild(this.emitter);
-
   this.emitter.minParticleSpeed.setTo(-15, -20);
   this.emitter.maxParticleSpeed.setTo(15, -80);
   this.emitter.gravity = 0;
