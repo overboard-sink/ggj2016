@@ -1,8 +1,8 @@
-# DEMON TOUCH
+# DEMON TORCH
 
-You are a demon, you are sent by your master to light the flames of hell so that he may come back and conquire earth, but first you have to get past the monks.
+You are a demon, you are sent by your master to light the flames of hell so that he may come back and conquire earth, but first you have to get past the monks, bruiser, and other holy warriors.
 
-Play as Pwom, the kitten-and-puppy-eating monk-slaying purple demon as you light the way for your master!
+Play as Pwom, the kitten-and-puppy-eating monk-slaying purple demon as you light the way for your dark master!
 
 ## CREDITS
 
@@ -13,7 +13,7 @@ Play as Pwom, the kitten-and-puppy-eating monk-slaying purple demon as you light
 * Amanda Baker - Artist
 * Andrew Sallwasser - Artist, Colorist
 
-Created for Global Game Jam 2016
+**Created for Global Game Jam 2016**
 
 January 29-31, 2016 at the University of Missouri St. Louis
 
