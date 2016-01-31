@@ -82,7 +82,7 @@ DefaultState.prototype.update = function update() {
   this.isoGroup.sort('sortValue', Phaser.Group.SORT_ASCENDING);
 };
 
-var DRAW_DEBUG_BOXES = true;
+var DRAW_DEBUG_BOXES = false;
 
 DefaultState.prototype.render = function render() {
   Phaser.State.prototype.render.call(this);

@@ -6,7 +6,9 @@ var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
   
   var standingChance = 1 - Math.min(difficulty * .10, .65);
   
-  var walkingChance =  standingChance + (1 - Math.min(difficulty * .2, .65));
+  var walkingChance = standingChance + (1 - Math.min(difficulty * .2, .65));
+
+  var chasingChance = walkingChance + (1 - Math.min(difficulty * .2, .85));
 
   for (var i = 0; i < numMonks; i++) {
     var monk;
@@ -20,11 +22,13 @@ var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
     var dieRoll = Math.random();
 
     if (dieRoll < standingChance)
-      monk = new MonkStanding(game, x, y, demon);
+      monk = new MonkRamming(game, x, y, demon);
     else if (dieRoll < walkingChance)
       monk = new MonkWalking(game, x, y, demon);
-    else
+    else if (dieRoll < chasingChance)
       monk = new MonkChasing(game, x, y, demon);
+    else
+      monk = new MonkRamming(game, x, y, demon);
 
 
     this.children.push(monk);
