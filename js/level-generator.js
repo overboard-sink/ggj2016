@@ -33,7 +33,8 @@ LevelGenerator.prototype.generate = function generate(state, difficulty, group) 
 };
 
 LevelGenerator.prototype.genConstellation = function generate(difficulty) {
-  return new RitualSymbol(this.game, Math.random() > .5 ? 0 : 1);
+  var symbolId = difficulty % 3;//Math.floor(Math.random() * 3);
+  return new RitualSymbol(this.game, symbolId);
 };
 
 LevelGenerator.prototype.genHintTrail = function genHintTrail(difficulty, demon, symbol) {

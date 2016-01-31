@@ -8,16 +8,26 @@ RitualSymbol = function (game, symbolId) {
 
   switch (symbolId) {
     case 0:
-      coords.push({ x: 250, y: 250 });
-      coords.push({ x: 500, y: 250 });
-      coords.push({ x: 375, y: 500 });
+      coords.push({ x: 325, y: 850 });
+      coords.push({ x: 167, y: 410 });
+      coords.push({ x: 520, y: 685 });
+      coords.push({ x: 140, y: 685 });
+      coords.push({ x: 480, y: 410 });
       overlayCoords.x = 300;
       overlayCoords.y = 300;
       break;
     case 1:
-      coords.push({ x: 250, y: 500 });
+      coords.push({ x: 164, y: 380 });
       coords.push({ x: 500, y: 500 });
-      coords.push({ x: 375, y: 250 });
+      coords.push({ x: 164, y: 720 });
+      overlayCoords.x = 300;
+      overlayCoords.y = 300;
+      break;
+    case 2:
+      coords.push({ x: 128, y: 420 });
+      coords.push({ x: 510, y: 745 });
+      coords.push({ x: 128, y: 745 });
+      coords.push({ x: 510, y: 420 });
       overlayCoords.x = 300;
       overlayCoords.y = 300;
       break;
@@ -42,6 +52,7 @@ RitualSymbol = function (game, symbolId) {
 RitualSymbol.preload = function (game) {
   game.load.image('overlay-0', '/img/overlay.png');
   game.load.image('overlay-1', '/img/overlay-1.png');
+  game.load.image('overlay-2', '/img/overlay-2.png');
 }
 
 RitualSymbol.prototype.update = function () {
