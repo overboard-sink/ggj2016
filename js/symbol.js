@@ -5,24 +5,32 @@ RitualSymbol = function (game, symbolId) {
   this.children = [];
   var coords = [];
   var overlayCoords = {};
+  var frames;
 
   switch (symbolId) {
     case 0:
       coords.push({ x: 250, y: 250 });
       coords.push({ x: 500, y: 250 });
       coords.push({ x: 375, y: 500 });
-      overlayCoords.x = 300;
-      overlayCoords.y = 300;
+      overlayCoords.x = 0;
+      overlayCoords.y = 0;
+      frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       break;
     case 1:
       coords.push({ x: 250, y: 500 });
       coords.push({ x: 500, y: 500 });
       coords.push({ x: 375, y: 250 });
-      overlayCoords.x = 300;
-      overlayCoords.y = 300;
+      overlayCoords.x = 0;
+      overlayCoords.y = 0;
+      frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       break;
   }
-  this.overlay = this.game.add.sprite(overlayCoords.x, overlayCoords.y, 'overlay-' + symbolId, 0);
+  this.overlay = this.game.add.sprite(
+    overlayCoords.x,
+    overlayCoords.y,
+    'overlay-' + symbolId,
+    0);
+  this.overlay.animations.add('default', frames, 12, false);
   this.overlay.visible = false;
 
   var prevTorch;
@@ -40,13 +48,16 @@ RitualSymbol = function (game, symbolId) {
 };
 
 RitualSymbol.preload = function (game) {
-  game.load.image('overlay-0', '/img/overlay.png');
-  game.load.image('overlay-1', '/img/overlay-1.png');
+  game.load.spritesheet('overlay-0', '/img/summon_pentagram.png',
+    TILE_W * 8, TILE_H * 8);
+  game.load.spritesheet('overlay-1', '/img/summon_archer.png',
+    TILE_W * 8, TILE_H * 8);
 }
 
 RitualSymbol.prototype.update = function () {
-  if (this.isComplete()) {
+  if (this.isComplete() && !this.overlay.visible) {
     this.overlay.visible = true;
+    this.overlay.animations.play('default');
   }
 };
 
