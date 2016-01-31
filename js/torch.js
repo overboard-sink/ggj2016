@@ -30,7 +30,7 @@ Torch.preload = function preload(game) {
     TILE_W * 2,
     TILE_H * 4
   );
-  game.load.audio('torch-light', '/ogg/ggj2016/torch_light.ogg');
+  game.load.audio('torch-light', '/ggj2016/ogg/torch_light.ogg');
 };
 
 Torch.prototype = Object.create(BaseSprite.prototype);

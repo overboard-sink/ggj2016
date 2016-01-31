@@ -74,7 +74,7 @@ RitualSymbol.preload = function (game) {
   game.load.spritesheet('overlay-2', '/img/ggj2016/summon_spears.png',
     TILE_W * 8, TILE_H * 8);
 
-  game.load.audio('symbol', '/ogg/ggj2016/symbol.ogg');
+  game.load.audio('symbol', '/ggj2016/ogg/symbol.ogg');
 }
 
 RitualSymbol.prototype.update = function () {

@@ -25,7 +25,7 @@ MonkBase.preload = function preload(game) {
   game.load.spritesheet('monk-rammer', '/img/ggj2016/monk_attack_walk.png', TILE_W, TILE_H);
   game.load.spritesheet('monk-death', '/img/ggj2016/monk_explode.png', TILE_W * 2, TILE_H * 2);
   game.load.spritesheet('monk-rammer-death', '/img/ggj2016/monk_attack_explode.png', TILE_W * 2, TILE_H * 2);
-  game.load.audio('scream', '/ogg/ggj2016/monk_fear.ogg');
+  game.load.audio('scream', '/ggj2016/ogg/monk_fear.ogg');
 };
 
 MonkBase.prototype = Object.create(BaseSprite.prototype);
