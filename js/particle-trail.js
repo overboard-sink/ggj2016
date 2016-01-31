@@ -26,8 +26,8 @@ var ParticleTrail = function ParticleTrail(game, source, useBig) {
 };
 
 ParticleTrail.preload = function preload(game) {
-  game.load.image('particle', '/img/particle.png');
-  game.load.image('particle-big', '/img/particle-big.png');
+  game.load.image('particle', '/img/ggj2016/particle.png');
+  game.load.image('particle-big', '/img/ggj2016/particle-big.png');
 };
 
 ParticleTrail.prototype = Object.create(Phaser.Sprite.prototype, {

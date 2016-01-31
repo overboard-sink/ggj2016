@@ -26,11 +26,11 @@ var Torch = function Torch(game, x, y) {
 
 Torch.preload = function preload(game) {
   game.load.spritesheet(
-    'torch', '/img/tower_wide.png',
+    'torch', '/img/ggj2016/tower_wide.png',
     TILE_W * 2,
     TILE_H * 4
   );
-  game.load.audio('torch-light', '/ogg/torch_light.ogg');
+  game.load.audio('torch-light', '/ogg/ggj2016/torch_light.ogg');
 };
 
 Torch.prototype = Object.create(BaseSprite.prototype);

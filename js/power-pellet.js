@@ -3,7 +3,7 @@ var PowerPellet = function PowerPellet(game, demon) {
 };
 
 PowerPellet.preload = function(game) {
-  game.load.spritesheet('power-pellet', '/img/power_up_2.png', 27, 32);
+  game.load.spritesheet('power-pellet', '/img/ggj2016/power_up_2.png', 27, 32);
 };
 
 PowerPellet.prototype = Object.create(BasePowerup.prototype);

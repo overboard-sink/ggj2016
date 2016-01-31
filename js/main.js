@@ -28,10 +28,10 @@ function main() {
       PowerPellet.preload(game);
 
       // Other assets
-      game.load.image('bkg', '/img/floor_full.png');
-      game.load.image('score-bkg', '/img/score_screen.png');
-      game.load.image('intro', '/img/title_screen.png');
-      game.load.audio('drums', '/ogg/drums.ogg');
+      game.load.image('bkg', '/img/ggj2016/floor_full.png');
+      game.load.image('score-bkg', '/img/ggj2016/score_screen.png');
+      game.load.image('intro', '/img/ggj2016/title_screen.png');
+      game.load.audio('drums', '/ogg/ggj2016/drums.ogg');
     },
 
     create: function create() {
