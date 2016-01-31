@@ -45,6 +45,10 @@ DefaultState.prototype.update = function update() {
 
   this.symbol.update();
 
+  if (this.symbol.symbolAnimationComplete && this.monasticOrder.active) {
+    this.monasticOrder.kill();    
+  }
+
   // touching torches
   this.game.physics.arcade.overlap(this.demon, this.symbol.children, function (demon, torch) {
     if (!torch.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
@@ -133,9 +137,9 @@ DefaultState.prototype.destroy = function destroy() {
 
 DefaultState.prototype.spawnPowerup = function () {
   console.log('Trying to spawn powerup...');
-  //if (Math.random() > .5 && (!this.lastPowerup || !this.lastPowerup.alive)) {
-    var i = 1;//(this.powerups.length * Math.random()) | 0;
+  if (!this.lastPowerup || !this.lastPowerup.alive) {
+    var i = (this.powerups.length * Math.random()) | 0;
     this.lastPowerup = this.powerups[i];
     this.lastPowerup.resetRandom();
-  //}
+  }
 };

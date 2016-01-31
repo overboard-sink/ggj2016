@@ -3,6 +3,7 @@
 RitualSymbol = function (game, symbolId) {
   this.game = game;
   this.children = [];
+  this.symbolAnimationComplete = false;
   var coords = [];
   var overlayCoords = {};
   var frames;
@@ -41,7 +42,11 @@ RitualSymbol = function (game, symbolId) {
     overlayCoords.y,
     'overlay-' + symbolId,
     0);
-  this.overlay.animations.add('default', frames, 12, false);
+  var anim = this.overlay.animations.add('default', frames, 12, false);
+  var _this = this;
+  anim.onComplete.add(function () {
+    _this.symbolAnimationComplete = true;
+  });
   this.overlay.visible = false;
 
   var prevTorch;
