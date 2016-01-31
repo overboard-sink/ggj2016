@@ -1,5 +1,7 @@
-var ParticleTrail = function ParticleTrail(game, x, y) {
-  Phaser.Sprite.call(this, game, x, y, 'particle', 0);
+var ParticleTrail = function ParticleTrail(game, source) {
+  Phaser.Sprite.call(this, game, source.x, source.y, 'particle', 0);
+
+  this.source = source;
 
   this.emitter = this.game.add.emitter(0, 0, 50);
 
@@ -12,6 +14,8 @@ var ParticleTrail = function ParticleTrail(game, x, y) {
   this.emitter.gravity = 0;
 
   this.game.physics.arcade.enable(this);
+
+  this.pulseFrequency = 0;
   
 };
 
@@ -29,21 +33,39 @@ ParticleTrail.prototype.update = function () {
 
 };
 
-ParticleTrail.prototype.setTarget = function (target) {
-  this.rotation = this.game.physics.arcade.moveToXY(this, target.x, target.y - 125, 0, 5000);
+ParticleTrail.prototype.resetTarget = function (target) {
+  this.end(false);
+  
+  this.target = target;
+  this.begin();
+  
 }
 
 ParticleTrail.prototype.begin = function () {
+  this.x = this.source.x;
+  this.y = this.source.y;
+
+  this.rotation = this.game.physics.arcade.moveToXY(this, this.target.x, this.target.y - 125, 0, 3000);
+
   this.emitter.start(false, 1000, 50);
   this.visible = true;  
 
-  if (this.stopEvent)
+  if (this.stopEvent) {
     this.stopEvent.timer.remove(this.stopEvent);
+    this.stopEvent = undefined;
+  }
 
-  this.stopEvent = this.game.time.events.add(Phaser.Timer.SECOND * 5, this.end, this);
+  if (this.loopEvent) {
+    this.loopEvent.timer.remove(this.loopEvent);
+    this.loopEvent = undefined;
+  }
+
+  this.stopEvent = this.game.time.events.add(Phaser.Timer.SECOND * 3, this.end, this, true);
 };
 
-ParticleTrail.prototype.end = function () {
+ParticleTrail.prototype.end = function (loop) {
   this.emitter.kill();
   this.visible = false;
+  if (loop)
+    this.loopEvent = this.game.time.events.add(Phaser.Timer.SECOND * this.pulseFrequency, this.begin, this);
 };

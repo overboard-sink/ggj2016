@@ -1,8 +1,7 @@
 // jscs:disable
 
-var DefaultState = function DefaultState(symbolId) {
+var DefaultState = function DefaultState() {
   Phaser.State.call(this);
-  this.symbolId = symbolId;
 };
 
 DefaultState.prototype = Object.create(Phaser.State.prototype);
@@ -17,27 +16,9 @@ DefaultState.prototype.create = function create() {
   // Iso group is used to ensure sprites are drawn with correct sort order.
   this.isoGroup = this.game.add.group();
 
-  this.demon = new Demon(this.game, 20, 20);
-  this.isoGroup.add(this.demon);
+  //This function handles hydrating the demon, symbol, monasticOrder, and door properties
+  this.game.levelGenerator.generate(this, this.game.difficulty, this.isoGroup);
 
-  this.symbol = new RitualSymbol(this.game, this.symbolId);
-
-  this.symbol.children.forEach(function (child) {
-    this.isoGroup.add(child);
-  }, this);
-
-  this.hintTrail = new ParticleTrail(this.game, 20, 20);
-  this.game.world.add(this.hintTrail); this.hintTrail.begin();
-  this.hintTrail.setTarget(this.symbol.children[0]);
-
-  this.door = new Door(this.game, 80, 0);
-  this.isoGroup.add(this.demon);
-  this.game.world.add(this.door);
-
-  this.monasticOrder = new MonasticOrder(this.game, 4, this.demon);
-  this.monasticOrder.children.forEach(function (monk) {
-    this.isoGroup.add(monk);
-  }, this);
 };
 
 DefaultState.prototype.update = function update() {
@@ -51,12 +32,10 @@ DefaultState.prototype.update = function update() {
   this.game.physics.arcade.overlap(this.demon, this.symbol.children, function (demon, torch) {
     if (!torch.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
       torch.light();
-      if (torch.nextTorch) {
-        _this.hintTrail.x = torch.x;
-        _this.hintTrail.y = torch.y - 125;
-        _this.hintTrail.setTarget(torch.nextTorch);
-        _this.hintTrail.end();
-        _this.hintTrail.begin();
+      if (torch.nextTorch) {        
+        _this.hintTrail.resetTarget(torch.nextTorch);
+      } else {
+        _this.hintTrail.resetTarget(_this.door);
       }
     }
   });
@@ -74,18 +53,17 @@ DefaultState.prototype.update = function update() {
       _this.demon.kill();
       _this.demon.visible = true;
       _this.game.time.events.add(1500, function () {
-        _this.game.state.restart();
+        _this.game.difficulty = 0;
+        _this.game.state.start('default');
       });
     }
   });
 
   // exit room
-  if (this.door.isOpen) {
-    this.game.physics.arcade.overlap(this.demon, this.door, function() {
-      if (Math.random() > .5)
-        _this.game.state.start('default0');
-      else
-        _this.game.state.start('default1');
+  if (this.door.isOpen) {    
+    this.game.physics.arcade.overlap(this.demon, this.door, function () {
+      _this.game.difficulty += 1;
+      _this.game.state.start('default');      
     });
   }
 
@@ -104,12 +82,12 @@ DefaultState.prototype.render = function render() {
 
   if (DRAW_DEBUG_BOXES) {
 
-    game.debug.text('Demon z-depth: ' + this.demon.z + ' ... Demon y-value: ' + this.demon.y, 10, 20);
+    //game.debug.text('Demon z-depth: ' + this.demon.z + ' ... Demon y-value: ' + this.demon.y, 10, 20);
     //game.debug.text('Torch1 z-depth: ' + this.symbol.children[0].z + ' ... y-value: ' + this.symbol.children[0].y, 10, 40);
     //game.debug.text('Torch2 z-depth: ' + this.symbol.children[1].z + ' ... y-value: ' + this.symbol.children[1].y, 10, 60);
     //game.debug.text('Torch3 z-depth: ' + this.symbol.children[2].z + ' ... y-value: ' + this.symbol.children[2].y, 10, 80);
     //game.debug.text('Monk z-depth: ' + this.testMonk.z + ' ... Monk y-value: ' + this.testMonk.y, 10, 100);
-    game.debug.text('Background z-depth: ' + this.bkg.z, 10, 40);
+    //game.debug.text('Background z-depth: ' + this.bkg.z, 10, 40);
 
 
     this.game.debug.body(this.demon);

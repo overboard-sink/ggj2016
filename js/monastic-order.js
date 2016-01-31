@@ -1,14 +1,17 @@
-var MonasticOrder = function MonasticOrder(game, numMonks, demon) {
+var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
   this.game = game;
   this.children = [];
-
+  var numMonks = difficulty < 7 ? difficulty * 2 : difficulty * 3;
+  
   for (var i = 0; i < numMonks; i++) {
     var monk;
-
-    // TODO: add a margin
-    var x = Math.random() * GAME_W;
-    var y = Math.random() * GAME_H;
-
+    var x, y;
+    do {
+      x = Math.random() * GAME_W;
+      y = Math.random() * GAME_H;
+    } while (this.game.physics.arcade.distanceToXY(demon, x, y) < 400 &&
+             this.game.physics.arcade.distanceToXY(door, x, y) < 150);
+    
     switch ((Math.random() * 3) | 0) {
       case 0:
         monk = new MonkStanding(game, x, y, demon);
