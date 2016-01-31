@@ -59,6 +59,8 @@ var Demon = function Demon(game, x, y) {
   this.emitter2.gravity = 50;
   this.emitter2.start(false, 1500, 10);
   this.emitter2.on = false;
+
+  this.eatSfx = this.game.add.audio('eat');
 };
 
 Demon.preload = function preload(game) {
@@ -143,6 +145,7 @@ Demon.prototype.kill = function () {
 Demon.prototype.setWalkSpeed = function (speed) {
   if (speed != this.defaultWalkSpeed) {
     this.animations.play('eat-powerup-0');
+    this.eatSfx.play();
     this.eating = true;
   }
   this.walkSpeed = speed;
@@ -192,6 +195,7 @@ Demon.prototype.updateGhosts = function () {
 Demon.prototype.toggleStarPower = function (enabled) {
   if (enabled) {
     this.animations.play('eat-powerup-1');
+    this.eatSfx.play();
     this.eating = true;
   } else {
     this.starPower = enabled;
@@ -201,7 +205,7 @@ Demon.prototype.toggleStarPower = function (enabled) {
 };
 
 Demon.prototype.exitStance = function () {
-  this.animations.play('victory');  
+  this.animations.play('victory');
   this.exiting = true;
   this.body.velocity.x = 0;
   this.body.velocity.y = 0;
