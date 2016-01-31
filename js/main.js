@@ -24,6 +24,7 @@ function main() {
       RitualSymbol.preload(game);
       MonkBase.preload(game);
       Door.preload(game);
+      SpeedPellet.preload(game);
 
       // Other assets
       game.load.image('bkg', '/img/floor_full.png');

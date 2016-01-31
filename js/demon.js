@@ -11,6 +11,8 @@ var Demon = function Demon(game, x, y) {
 
   game.physics.arcade.enable(this);
   this.body.setSize(70, 75, 0, 20);
+
+  this.walkSpeed = 200;
 };
 
 Demon.preload = function preload(game) {
@@ -32,7 +34,7 @@ Demon.prototype.update = function() {
   // movement
   if (this.alive) {
     if (this.game.physics.arcade.distanceToPointer(this) > 10) {
-      this.game.physics.arcade.moveToPointer(this, 200);
+      this.game.physics.arcade.moveToPointer(this, this.walkSpeed);
       this.faceVelocity();
     } else {
       this.animations.play('idle');

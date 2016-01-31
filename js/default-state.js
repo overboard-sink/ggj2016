@@ -18,7 +18,6 @@ DefaultState.prototype.create = function create() {
 
   //This function handles hydrating the demon, symbol, monasticOrder, and door properties
   this.game.levelGenerator.generate(this, this.game.difficulty, this.isoGroup);
-
 };
 
 DefaultState.prototype.update = function update() {
@@ -32,7 +31,7 @@ DefaultState.prototype.update = function update() {
   this.game.physics.arcade.overlap(this.demon, this.symbol.children, function (demon, torch) {
     if (!torch.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
       torch.light();
-      if (torch.nextTorch) {        
+      if (torch.nextTorch) {
         _this.hintTrail.resetTarget(torch.nextTorch);
       } else {
         _this.hintTrail.resetTarget(_this.door);
@@ -60,10 +59,10 @@ DefaultState.prototype.update = function update() {
   });
 
   // exit room
-  if (this.door.isOpen) {    
+  if (this.door.isOpen) {
     this.game.physics.arcade.overlap(this.demon, this.door, function () {
       _this.game.difficulty += 1;
-      _this.game.state.start('default');      
+      _this.game.state.start('default');
     });
   }
 
@@ -100,6 +99,10 @@ DefaultState.prototype.render = function render() {
       child &&
       this.game.debug.body(child);
     });
-    
+
   }
+};
+
+DefaultState.prototype.spawnPowerup = function() {
+
 };
