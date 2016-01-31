@@ -14,18 +14,21 @@ ScoreState.prototype.create = function create() {
   var _this = this;
 
   var preTimeout = 250;
-  var ghostTime = 4000;
-  var finalTimeout = 2000;
+  var ghostTime = 2500;
+  var finalTimeout = 500;
   var maxCols = 5;
   var offsetX = 200;
   var offsetY = 100;
   var spacingX = 24;
   var spacingY = 24;
+  this.canExit = false;
 
   var i = 0;
   var j = 0;
   var k = 0;
   var time = this.game.difficulty < 10 ? 250 : 100;
+
+  var _this = this;
 
   function nextGhost() {
     var x = j * spacingX + offsetX;
@@ -46,12 +49,19 @@ ScoreState.prototype.create = function create() {
     if (i < this.game.difficulty) {
       this.game.time.events.add(time, nextGhost);
     } else {
-      this.game.time.events.add(finalTimeout, function() {
-        this.game.difficulty = 0;
-        this.game.state.start('default');
+      this.game.time.events.add(finalTimeout, function () {
+        _this.canExit = true;
       });
     }
   }
 
   this.game.time.events.add(preTimeout, nextGhost);
+};
+
+ScoreState.prototype.update = function update() {
+  if (this.canExit && this.game.input.activePointer.isDown)
+  {
+        this.game.difficulty = 0;
+        this.game.state.start('default');
+  }
 };
