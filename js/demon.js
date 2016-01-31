@@ -4,8 +4,8 @@ var Demon = function Demon(game, x, y) {
   this.animations.add('up',    [8,  9,  10, 11, 12, 13, 14, 15], 12);
   this.animations.add('left',  [16, 17, 18, 19, 20, 21, 22, 23], 12);
   this.animations.add('right', [24, 25, 26, 27, 28, 29, 30, 31], 12);
-  this.animations.add('dead',  [32], 0.5);
-  this.animations.add('idle',  [34, 35, 36, 37], 12);
+  this.animations.add('dead',  [32, 33, 34, 35, 36, 37, 38], 10, false);
+  this.animations.add('idle',  [43, 44, 45, 46], 12);
 
   this.anchor.setTo(.5, .75);
 
@@ -17,27 +17,8 @@ var Demon = function Demon(game, x, y) {
   this.defaultWalkSpeed = 200;
   this.walkSpeed = this.defaultWalkSpeed;
   this.isVictorious = false;
-  this.starPower = false;
 
   this.makeGhosts();
-
-  this.emitter = this.game.add.emitter(0, 0, 100);
-  this.emitter.makeParticles('particle');
-  //this.addChild(this.emitter);
-  this.emitter.minParticleSpeed.setTo(-50, -50);
-  this.emitter.maxParticleSpeed.setTo(50, -500);
-  this.emitter.gravity = 50;
-  this.emitter.start(false, 2000, 10);
-  this.emitter.on = false;
-
-  this.emitter2 = this.game.add.emitter(0, 0, 100);
-  this.emitter2.makeParticles('particle');
-  //this.addChild(this.emitter);
-  this.emitter2.minParticleSpeed.setTo(-50, -50);
-  this.emitter2.maxParticleSpeed.setTo(50, -500);
-  this.emitter2.gravity = 50;
-  this.emitter2.start(false, 2000, 10);
-  this.emitter2.on = false;
 };
 
 Demon.preload = function preload(game) {
@@ -58,33 +39,8 @@ Demon.prototype.constructor = Demon;
 Demon.prototype.update = function() {
   Phaser.Sprite.prototype.update.call(this);
 
-  //Set star power particle emitters
-  if (this.starPower) {
-    switch (this.facing) {
-      case Phaser.UP:
-        this.emitter.emitX = this.x + 20;
-        this.emitter2.emitX = this.x - 20;
-        this.emitter.emitY = this.y + 25;
-        this.emitter2.emitY = this.y + 25;
-        break;
-      case Phaser.DOWN:
-        this.emitter.emitX = this.x + 20;
-        this.emitter2.emitX = this.x - 20;
-        this.emitter.emitY = this.y + 30;
-        this.emitter2.emitY = this.y + 30;
-        break;
-      case Phaser.LEFT:
-      case Phaser.RIGHT:
-        this.emitter.emitX = this.x + 10;
-        this.emitter.emitY = this.y + 25;
-        this.emitter2.emitX = this.x - 10;
-        this.emitter2.emitY = this.y + 25;
-        break;
-    }
-  }
-
   // movement
-  if (this.alive) {
+  if (this.alive && !this.isDying) {
     if (this.game.physics.arcade.distanceToPointer(this) > 10) {
       this.game.physics.arcade.moveToPointer(this, this.walkSpeed);
       this.faceVelocity();
@@ -99,9 +55,17 @@ Demon.prototype.update = function() {
 };
 
 Demon.prototype.kill = function() {
-  BaseSprite.prototype.kill.call(this);
-  this.animations.play('dead');
-  this.rubberbandConst = -0.08;
+  if (!this.isDying && this.alive) {
+    this.body.velocity.x = 0;
+    this.body.velocity.y = 0;
+    this.isDying = true;
+    this.animations.play('dead');
+    this.rubberbandConst = -0.08;
+    var _this = this;
+    this.game.time.events.add(2000, function() {
+      BaseSprite.prototype.kill.call(this);
+    });
+  }
 };
 
 Demon.prototype.setWalkSpeed = function(speed) {
@@ -132,10 +96,4 @@ Demon.prototype.updateGhosts = function() {
         + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
     }
   }
-};
-
-Demon.prototype.toggleStarPower = function (enabled) {
-  this.starPower = enabled;  
-  this.emitter.on = enabled;
-  this.emitter2.on = enabled;
 };
