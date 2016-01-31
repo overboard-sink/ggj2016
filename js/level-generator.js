@@ -11,7 +11,7 @@ LevelGenerator.prototype = Object.create(Object.prototype);
 LevelGenerator.prototype.generate = function generate(state, difficulty, group) {
   state.demon = this.genDemon(difficulty);
   state.symbol = this.genConstellation(difficulty);
-  state.monasticOrder = this.genMonks(difficulty, state.demon);
+  state.monasticOrder = this.genMonks(difficulty, state.demon, state.door);
   state.door = this.genDoor(difficulty);
 
   state.symbol.children.forEach(function (child) {
@@ -45,8 +45,8 @@ LevelGenerator.prototype.genHintTrail = function genHintTrail(difficulty, demon,
   return trail;
 };
 
-LevelGenerator.prototype.genMonks = function genMonks(difficulty, demon) {
-  return new MonasticOrder(this.game, difficulty, demon);
+LevelGenerator.prototype.genMonks = function genMonks(difficulty, demon, door) {
+  return new MonasticOrder(this.game, difficulty, demon, door);
 };
 
 LevelGenerator.prototype.genDemon = function genDemon(difficulty) {
