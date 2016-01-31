@@ -23,9 +23,9 @@ function main() {
       Torch.preload(game);
       RitualSymbol.preload(game);
       MonkBase.preload(game);
+      Door.preload(game);
 
       // Other assets
-      game.load.image('door_vert', '/img/door_vert.png');
       game.load.image('bkg', '/img/floor_full.png');
     },
 

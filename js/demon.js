@@ -7,6 +7,7 @@ var Demon = function Demon(game, x, y) {
   this.animations.add('left',  [16, 17, 18, 19, 20, 21, 22, 23], 12);
   this.animations.add('right', [24, 25, 26, 27, 28, 29, 30, 31], 12);
   this.animations.add('dead',  [32], 0.5);
+  this.animations.add('idle',  [33, 34, 35, 36], 12);
 
   this.anchor.setTo(.5, .75);
 
