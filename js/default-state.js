@@ -75,7 +75,7 @@ DefaultState.prototype.update = function update() {
   this.isoGroup.sort('sortValue', Phaser.Group.SORT_ASCENDING);
 };
 
-var DRAW_DEBUG_BOXES = false;
+var DRAW_DEBUG_BOXES = true;
 
 DefaultState.prototype.render = function render() {
   Phaser.State.prototype.render.call(this);
@@ -91,6 +91,7 @@ DefaultState.prototype.render = function render() {
 
 
     this.game.debug.body(this.demon);
+    this.game.debug.body(this.door);
     this.symbol.children.forEach(function(child) {
       child &&
       this.game.debug.body(child);

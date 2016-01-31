@@ -11,8 +11,8 @@ LevelGenerator.prototype = Object.create(Object.prototype);
 LevelGenerator.prototype.generate = function generate(state, difficulty, group) {
   state.demon = this.genDemon(difficulty);
   state.symbol = this.genConstellation(difficulty);
-  state.monasticOrder = this.genMonks(difficulty, state.demon, state.door);
   state.door = this.genDoor(difficulty);
+  state.monasticOrder = this.genMonks(difficulty, state.demon, state.door);
 
   state.symbol.children.forEach(function (child) {
     group.add(child);

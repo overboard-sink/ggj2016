@@ -9,6 +9,7 @@ var Door = function Door(game, x, y) {
   this.isOpen = false;
 
   this.game.physics.arcade.enable(this);
+  this.anchor.setTo(.5, .5);
 };
 
 Door.preload = function preload(game) {

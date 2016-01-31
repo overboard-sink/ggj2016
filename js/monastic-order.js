@@ -1,17 +1,12 @@
 var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
   this.game = game;
   this.children = [];
-  var numMonks = difficulty < 7 ? difficulty * 2 : difficulty * 3;
 
-  var baseChance = 0;
-
-  var standingChance = 1 - Math.max(difficulty * .10, .95);
-
-  baseChance += standingChance;
-
-  var walkingChance = baseChance + 1 - Math.max(difficulty * .10, .95);
-
-  baseChance += walkingChance;
+  var numMonks = Math.min(Math.floor(difficulty * 1.3), 15);
+  
+  var standingChance = 1 - Math.min(difficulty * .10, .65);
+  
+  var walkingChance =  standingChance + (1 - Math.min(difficulty * .2, .65));
 
   for (var i = 0; i < numMonks; i++) {
     var monk;
@@ -19,8 +14,8 @@ var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
     do {
       x = Math.random() * GAME_W;
       y = Math.random() * GAME_H;
-    } while (this.game.physics.arcade.distanceToXY(demon, x, y) < 400 &&
-             this.game.physics.arcade.distanceToXY(door, x, y) < 150);
+    } while (this.game.physics.arcade.distanceToXY(demon, x, y) < 400 ||
+             this.game.physics.arcade.distanceToXY(door, x, y) < 250);
 
     var dieRoll = Math.random();
 
