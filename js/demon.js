@@ -48,3 +48,7 @@ Demon.prototype.kill = function() {
   BaseSprite.prototype.kill.call(this);
   this.animations.play('dead');
 };
+
+Demon.prototype.setWalkSpeed = function(speed) {
+  this.walkSpeed = speed;
+};
