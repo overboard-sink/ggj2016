@@ -143,7 +143,7 @@ Demon.prototype.updateGhosts = function() {
   }
 };
 
-Demon.prototype.toggleStarPower = function (enabled) {
+Demon.prototype.toggleStarPower = function(enabled) {
   this.starPower = enabled;
   this.emitter.on = enabled;
   this.emitter2.on = enabled;
