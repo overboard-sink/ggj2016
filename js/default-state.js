@@ -74,6 +74,7 @@ DefaultState.prototype.update = function update() {
       if (_this.demon.starPower) {
         monk.kill();
       } else {
+        _this.hintTrail.end();
         _this.demon.kill();
         _this.demon.visible = true;
         _this.game.time.events.add(2500, function () {

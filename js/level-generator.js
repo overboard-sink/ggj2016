@@ -38,7 +38,7 @@ LevelGenerator.prototype.genConstellation = function generate(difficulty) {
 };
 
 LevelGenerator.prototype.genHintTrail = function genHintTrail(difficulty, demon, symbol) {
-  var trail = new ParticleTrail(this.game, demon);
+  var trail = new ParticleTrail(this.game, demon, true);
   this.game.world.add(trail);
 
   trail.pulseFrequency = difficulty < 10 ? difficulty : 10;

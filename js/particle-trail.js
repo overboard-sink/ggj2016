@@ -1,17 +1,23 @@
-var ParticleTrail = function ParticleTrail(game, source) {
-  Phaser.Sprite.call(this, game, source.x, source.y, 'particle', 0);
+var ParticleTrail = function ParticleTrail(game, source, useBig) {
+  var keyName = 'particle'
+  if (useBig) {
+    keyName += '-big';
+  }
+  Phaser.Sprite.call(this, game, source.x, source.y, keyName, 0);
 
   this.source = source;
 
   this.emitter = this.game.add.emitter(0, 0, 50);
 
-  this.emitter.makeParticles('particle');
+  this.emitter.makeParticles(keyName);
 
   this.addChild(this.emitter);
 
   this.emitter.minParticleSpeed.setTo(-20, -15);
   this.emitter.maxParticleSpeed.setTo(-100, 15);
   this.emitter.gravity = 0;
+  this.emitter.start(false, 1000, 50);
+  this.emitter.on = false;
 
   this.game.physics.arcade.enable(this);
 
@@ -21,6 +27,7 @@ var ParticleTrail = function ParticleTrail(game, source) {
 
 ParticleTrail.preload = function preload(game) {
   game.load.image('particle', '/img/particle.png');
+  game.load.image('particle-big', '/img/particle-big.png');
 };
 
 ParticleTrail.prototype = Object.create(Phaser.Sprite.prototype, {
@@ -47,7 +54,6 @@ ParticleTrail.prototype.begin = function () {
 
   this.rotation = this.game.physics.arcade.moveToXY(this, this.target.x, this.target.y - 125, 0, 3000);
 
-  this.emitter.start(false, 1000, 50);
   this.visible = true;  
 
   if (this.stopEvent) {
@@ -59,12 +65,12 @@ ParticleTrail.prototype.begin = function () {
     this.loopEvent.timer.remove(this.loopEvent);
     this.loopEvent = undefined;
   }
-
+  this.emitter.on = true;
   this.stopEvent = this.game.time.events.add(Phaser.Timer.SECOND * 3, this.end, this, true);
 };
 
 ParticleTrail.prototype.end = function (loop) {
-  this.emitter.kill();
+  this.emitter.on = false;
   this.visible = false;
   if (loop)
     this.loopEvent = this.game.time.events.add(Phaser.Timer.SECOND * this.pulseFrequency, this.begin, this);
