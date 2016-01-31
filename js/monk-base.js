@@ -12,9 +12,9 @@ var MonkBase = function MonkBase(game, x, y, key, frame, demon) {
   this.animations.play('down');
 
   this.game.physics.arcade.enable(this);
-  
+
   this.demon = demon;
-  
+
   this.anchor.setTo(.5, .75);
 
 };
@@ -25,6 +25,7 @@ MonkBase.preload = function preload(game) {
   game.load.spritesheet('monk-rammer', '/img/monk_attack_walk.png', TILE_W, TILE_H);
   game.load.spritesheet('monk-death', '/img/monk_explode.png', TILE_W * 2, TILE_H * 2);
   game.load.spritesheet('monk-rammer-death', '/img/monk_attack_explode.png', TILE_W * 2, TILE_H * 2);
+  game.load.audio('scream', '/ogg/monk_fear.ogg');
 };
 
 MonkBase.prototype = Object.create(BaseSprite.prototype);
@@ -56,5 +57,5 @@ MonkBase.prototype.kill = function kill() {
   this.deathAnimation.x = this.x;
   this.deathAnimation.y = this.y;
   this.deathAnimation.visible = true;
-  this.deathAnimation.play('explode');  
+  this.deathAnimation.play('explode');
 };
