@@ -142,7 +142,7 @@ DefaultState.prototype.destroy = function destroy() {
 DefaultState.prototype.spawnPowerup = function () {
   console.log('Trying to spawn powerup...');
   if (!this.lastPowerup || !this.lastPowerup.alive) {
-    var i = (this.powerups.length * Math.random()) | 0;
+    var i = Math.floor(this.powerups.length * Math.random());
     this.lastPowerup = this.powerups[i];
     this.lastPowerup.resetRandom();
   }

@@ -19,12 +19,12 @@ BasePowerup.prototype.constructor = BasePowerup;
 BasePowerup.prototype.resetRandom = function() {
   console.log('spawned powerup');
 
-  var margin = 80;
+  var margin = TILE_W;
 
   var tries = 0;
   do {
-    var x = Math.random() * (GAME_W - (margin * 2)) + margin;
-    var y = Math.random() * (GAME_H - (margin * 2)) + margin;
+    var x = Math.random() * (GAME_W - (margin * 2)) + margin / 2;
+    var y = Math.random() * (GAME_H - (margin * 2)) + (margin * 2);
 
     tries++;
     if (tries > 500) {
