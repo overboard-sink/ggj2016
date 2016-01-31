@@ -35,6 +35,7 @@ RitualSymbol = function (game, symbolId) {
       coords.push({ x: 510, y: 420 });
       overlayCoords.x = 90;
       overlayCoords.y = 200;
+      frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       break;
   }
   this.overlay = this.game.add.sprite(
@@ -68,7 +69,7 @@ RitualSymbol.preload = function (game) {
     TILE_W * 8, TILE_H * 8);
   game.load.spritesheet('overlay-1', '/img/summon_archer.png',
     TILE_W * 8, TILE_H * 8);
-  game.load.spritesheet('overlay-2', '/img/summon_archer.png',
+  game.load.spritesheet('overlay-2', '/img/summon_spears.png',
     TILE_W * 8, TILE_H * 8);
 }
 

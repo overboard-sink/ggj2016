@@ -15,7 +15,7 @@ IntroState.prototype.create = function create() {
 IntroState.prototype.update = function update() {
   if (this.game.input.activePointer.isDown)
   {
-    if (this.game.physics.arcade.distanceToXY(this.game.input.activePointer, 315, 683) < 232)
+    //if (this.game.physics.arcade.distanceToXY(this.game.input.activePointer, 315, 683) < 232)
       this.game.state.start('default');
   }
 };

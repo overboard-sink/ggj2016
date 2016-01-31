@@ -48,7 +48,9 @@ MonasticOrder.prototype.update = function update() {
 
 MonasticOrder.prototype.kill = function kill() {
   this.children.forEach(function (child) {
-    child.kill();
+    if (child.alive) {
+      child.kill();
+    }
   });
   this.active = false;
 };
