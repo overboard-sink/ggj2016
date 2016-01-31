@@ -32,13 +32,14 @@ function main() {
       game.load.image('score-bkg', '/img/score_screen.png');
       game.load.image('intro', '/img/title_screen.png');
       game.load.audio('drums', '/ogg/drums.ogg');
+      game.load.audio('eat', '/ogg/eat.ogg');
     },
 
     create: function create() {
       game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       game.antialias = false;
 
-      game.difficulty = 2;
+      game.difficulty = 0;
       game.levelGenerator = new LevelGenerator(game);
 
       game.state.add('intro', new IntroState());
