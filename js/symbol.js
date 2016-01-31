@@ -5,6 +5,7 @@ RitualSymbol = function (game, symbolId) {
   this.children = [];
   var coords = [];
   var overlayCoords = {};
+  var frames;
 
   switch (symbolId) {
     case 0:
@@ -13,26 +14,34 @@ RitualSymbol = function (game, symbolId) {
       coords.push({ x: 520, y: 685 });
       coords.push({ x: 140, y: 685 });
       coords.push({ x: 480, y: 410 });
-      overlayCoords.x = 300;
-      overlayCoords.y = 300;
+      overlayCoords.x = 0;
+      overlayCoords.y = 0;
+      frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
       break;
     case 1:
       coords.push({ x: 164, y: 380 });
       coords.push({ x: 500, y: 500 });
       coords.push({ x: 164, y: 720 });
-      overlayCoords.x = 300;
-      overlayCoords.y = 300;
+      overlayCoords.x = 0;
+      overlayCoords.y = 0;
+      frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       break;
     case 2:
       coords.push({ x: 128, y: 420 });
       coords.push({ x: 510, y: 745 });
       coords.push({ x: 128, y: 745 });
       coords.push({ x: 510, y: 420 });
-      overlayCoords.x = 300;
-      overlayCoords.y = 300;
+      overlayCoords.x = 0;
+      overlayCoords.y = 0;
       break;
   }
-  this.overlay = this.game.add.sprite(overlayCoords.x, overlayCoords.y, 'overlay-' + symbolId, 0);
+  this.overlay = this.game.add.sprite(
+    overlayCoords.x,
+    overlayCoords.y,
+    'overlay-' + symbolId,
+    0);
+  this.overlay.animations.add('default', frames, 12, false);
   this.overlay.visible = false;
 
   var prevTorch;
@@ -50,14 +59,18 @@ RitualSymbol = function (game, symbolId) {
 };
 
 RitualSymbol.preload = function (game) {
-  game.load.image('overlay-0', '/img/overlay.png');
-  game.load.image('overlay-1', '/img/overlay-1.png');
-  game.load.image('overlay-2', '/img/overlay-2.png');
+  game.load.spritesheet('overlay-0', '/img/summon_pentagram.png',
+    TILE_W * 8, TILE_H * 8);
+  game.load.spritesheet('overlay-1', '/img/summon_archer.png',
+    TILE_W * 8, TILE_H * 8);
+  game.load.spritesheet('overlay-2', '/img/summon_archer.png',
+    TILE_W * 8, TILE_H * 8);
 }
 
 RitualSymbol.prototype.update = function () {
-  if (this.isComplete()) {
+  if (this.isComplete() && !this.overlay.visible) {
     this.overlay.visible = true;
+    this.overlay.animations.play('default');
   }
 };
 
