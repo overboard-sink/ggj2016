@@ -1,3 +1,5 @@
+// jscs:disable
+
 var MonkChasing = function MonkChasing(game, x, y, demon) {
   MonkBase.call(this, game, x, y, 'monk', 0, demon);
 
@@ -5,7 +7,9 @@ var MonkChasing = function MonkChasing(game, x, y, demon) {
   this.fleeDistance = 100;
   this.chaseSpeed = 100;
 
-  this.fleeing = false;   
+  this.fleeing = false;
+
+  this.screamSfx = this.game.add.audio('scream');
 };
 
 MonkChasing.prototype = Object.create(MonkBase.prototype);
@@ -14,7 +18,7 @@ MonkChasing.prototype.constructor = MonkStanding;
 
 MonkChasing.prototype.update = function update() {
   MonkBase.prototype.update.call(this);
-  
+
   //Our monk runs away when the demon charges him
   if (!this.fleeing) {
     //var _demon = this.demon;
@@ -34,6 +38,7 @@ MonkChasing.prototype.update = function update() {
       }
       if (this.fleeing) {
         var _this = this;
+        this.screamSfx.play();
         this.game.time.events.add(1000, function () { _this.fleeing = false }, this);
 
         this.fleeDirection = { x: this.x + this.demon.body.velocity.x, y: this.y + this.demon.body.velocity.y }
@@ -48,4 +53,3 @@ MonkChasing.prototype.update = function update() {
   }
 
 };
-

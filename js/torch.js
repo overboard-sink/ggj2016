@@ -21,6 +21,7 @@ var Torch = function Torch(game, x, y) {
 
   this.anchor.setTo(.5, .9);
 
+  this.lightSfx = this.game.add.audio('torch-light');
 };
 
 Torch.preload = function preload(game) {
@@ -29,6 +30,7 @@ Torch.preload = function preload(game) {
     TILE_W * 2,
     TILE_H * 4
   );
+  game.load.audio('torch-light', '/ogg/torch_light.ogg');
 };
 
 Torch.prototype = Object.create(BaseSprite.prototype);
@@ -60,6 +62,9 @@ Torch.prototype.update = function update() {
 Torch.prototype.light = function light() {
   this.animations.play(TORCH_EXPLOSION);
   this.lit = true;
+
+  if (this.nextTorch)
+    this.lightSfx.play();
 
   this.emitter.start(false, 1000, 50);
 };
