@@ -30,7 +30,7 @@ ParticleTrail.prototype.update = function () {
 };
 
 ParticleTrail.prototype.setTarget = function (target) {
-  this.rotation = this.game.physics.arcade.moveToXY(this, target.x + (target.width / 2), target.y + (target.height / 2), 0, 5000);
+  this.rotation = this.game.physics.arcade.moveToXY(this, target.x, target.y - 125, 0, 5000);
 }
 
 ParticleTrail.prototype.begin = function () {

@@ -8,6 +8,8 @@ var MonkBase = function MonkBase(game, x, y, key, frame, demon) {
   this.game.physics.arcade.enable(this);
   
   this.demon = demon;
+  
+  this.anchor.setTo(.5, .75);
 };
 
 MonkBase.preload = function preload(game) {

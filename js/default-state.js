@@ -52,8 +52,8 @@ DefaultState.prototype.update = function update() {
     if (!torch.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
       torch.light();
       if (torch.nextTorch) {
-        _this.hintTrail.x = torch.x + (torch.width / 2);
-        _this.hintTrail.y = torch.y + (torch.height / 2);
+        _this.hintTrail.x = torch.x;
+        _this.hintTrail.y = torch.y - 125;
         _this.hintTrail.setTarget(torch.nextTorch);
         _this.hintTrail.end();
         _this.hintTrail.begin();
@@ -117,6 +117,11 @@ DefaultState.prototype.render = function render() {
       child &&
       this.game.debug.body(child);
     });
-    this.game.debug.body(this.testMonk);
+
+    this.monasticOrder.children.forEach(function (child) {
+      child &&
+      this.game.debug.body(child);
+    });
+    
   }
 };
