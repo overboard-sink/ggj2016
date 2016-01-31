@@ -15,6 +15,7 @@ var MonkBase = function MonkBase(game, x, y, key, frame, demon) {
 MonkBase.preload = function preload(game) {
   // TODO: move to base
   game.load.spritesheet('monk', '/img/monk_walk.png', TILE_W, TILE_H);
+  game.load.spritesheet('monk-rammer', '/img/monk_attack_walk.png', TILE_W, TILE_H);
 };
 
 MonkBase.prototype = Object.create(BaseSprite.prototype);
