@@ -1,5 +1,3 @@
-// jscs:disable
-
 var Demon = function Demon(game, x, y) {
   BaseSprite.call(this, game, x, y, 'demon', 0);
   this.animations.add('down',  [0,  1,  2,  3,  4,  5,  6,  7],  12);
@@ -7,7 +5,7 @@ var Demon = function Demon(game, x, y) {
   this.animations.add('left',  [16, 17, 18, 19, 20, 21, 22, 23], 12);
   this.animations.add('right', [24, 25, 26, 27, 28, 29, 30, 31], 12);
   this.animations.add('dead',  [32], 0.5);
-  this.animations.add('idle',  [33, 34, 35, 36], 12);
+  this.animations.add('idle',  [34, 35, 36, 37], 12);
 
   this.anchor.setTo(.5, .75);
 
@@ -28,20 +26,23 @@ Demon.prototype = Object.create(BaseSprite.prototype);
 
 Demon.prototype.constructor = Demon;
 
-Demon.prototype.update = function () {
+Demon.prototype.update = function() {
   Phaser.Sprite.prototype.update.call(this);
 
   // movement
-  this.game.physics.arcade.moveToPointer(this, 200);
-
   if (this.alive) {
-    if (this.body.velocity.x || this.body.velocity.y) {
+    if (this.game.physics.arcade.distanceToPointer(this) > 10) {
+      this.game.physics.arcade.moveToPointer(this, 200);
       this.faceVelocity();
+    } else {
+      this.animations.play('idle');
+      this.body.velocity.x = 0;
+      this.body.velocity.y = 0;
     }
   }
-}
+};
 
-Demon.prototype.kill = function () {
+Demon.prototype.kill = function() {
   BaseSprite.prototype.kill.call(this);
   this.animations.play('dead');
 };
