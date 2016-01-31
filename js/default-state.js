@@ -25,7 +25,7 @@ DefaultState.prototype.create = function create() {
     new SpeedPellet(this.game, this.demon),
   ];
   this.powerups.forEach(function(powerup) {
-    this.game.world.add(powerup);
+    this.isoGroup.add(powerup);
   }, this);
   this.lastPowerup = null;
 
@@ -114,12 +114,13 @@ DefaultState.prototype.render = function render() {
     });
 
   }
+
 };
 
 DefaultState.prototype.destroy = function destroy() {
   Phaser.Sprite.prototype.destroy.apply(this, arguments);
   this.game.time.events.remove(this.powerupTimer);
-}
+};
 
 DefaultState.prototype.spawnPowerup = function() {
   if (!this.lastPowerup || !this.lastPowerup.alive) {
