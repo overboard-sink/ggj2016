@@ -15,8 +15,8 @@ RitualSymbol = function (game, symbolId) {
       coords.push({ x: 520, y: 685 });
       coords.push({ x: 140, y: 685 });
       coords.push({ x: 480, y: 410 });
-      overlayCoords.x = 0;
-      overlayCoords.y = 0;
+      overlayCoords.x = 90;
+      overlayCoords.y = 200;
       frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
       break;
@@ -24,8 +24,8 @@ RitualSymbol = function (game, symbolId) {
       coords.push({ x: 164, y: 380 });
       coords.push({ x: 500, y: 500 });
       coords.push({ x: 164, y: 720 });
-      overlayCoords.x = 0;
-      overlayCoords.y = 0;
+      overlayCoords.x = 90;
+      overlayCoords.y = 200;
       frames = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       break;
     case 2:
@@ -33,8 +33,8 @@ RitualSymbol = function (game, symbolId) {
       coords.push({ x: 510, y: 745 });
       coords.push({ x: 128, y: 745 });
       coords.push({ x: 510, y: 420 });
-      overlayCoords.x = 0;
-      overlayCoords.y = 0;
+      overlayCoords.x = 90;
+      overlayCoords.y = 200;
       break;
   }
   this.overlay = this.game.add.sprite(

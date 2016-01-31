@@ -4,7 +4,10 @@ var Demon = function Demon(game, x, y) {
   this.animations.add('up',    [8,  9,  10, 11, 12, 13, 14, 15], 12);
   this.animations.add('left',  [16, 17, 18, 19, 20, 21, 22, 23], 12);
   this.animations.add('right', [24, 25, 26, 27, 28, 29, 30, 31], 12);
-  this.animations.add('dead',  [32, 33, 34, 35, 36, 37, 38], 10, false);
+  this.animations.add('dead',
+    [0, 0, 0, 0, 0, 0, 0, 32, 33, 34, 32, 33, 34, 32, 33, 34, 35, 36, 37, 38],
+    10, false
+  );
   this.animations.add('idle',  [43, 44, 45, 46], 12);
 
   this.anchor.setTo(.5, .75);
@@ -143,7 +146,7 @@ Demon.prototype.updateGhosts = function() {
   }
 };
 
-Demon.prototype.toggleStarPower = function (enabled) {
+Demon.prototype.toggleStarPower = function(enabled) {
   this.starPower = enabled;
   this.emitter.on = enabled;
   this.emitter2.on = enabled;
