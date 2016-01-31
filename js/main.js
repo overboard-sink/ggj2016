@@ -1,7 +1,6 @@
 var GAME_W = 640;
 var GAME_H = 1120;
 var GAME_MAIN_ID = 'main';
-var MAX_SCORE = 200;
 
 var TILE_W = 64;
 var TILE_H = 64;
@@ -35,8 +34,12 @@ function main() {
     create: function create() {
       game.difficulty = 0;
       game.levelGenerator = new LevelGenerator(game);
+
       game.state.add('default', new DefaultState());
-      game.state.start('default');
+      game.state.add('score', new ScoreState());
+
+      // game.state.start('default');
+      game.state.start('score');
     },
   });
 }

@@ -81,9 +81,11 @@ Demon.prototype.updateGhosts = function() {
     this.ghosts[0].y += (this.y - this.ghosts[0].y) * this.rubberbandConst;
     for (var i = 1; i < this.ghosts.length; i++) {
       this.ghosts[i].x +=
-      (this.ghosts[i - 1].x - this.ghosts[i].x) * this.rubberbandConst;
+        (this.ghosts[i - 1].x - this.ghosts[i].x) * this.rubberbandConst
+        + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
       this.ghosts[i].y +=
-      (this.ghosts[i - 1].y - this.ghosts[i].y) * this.rubberbandConst;
+        (this.ghosts[i - 1].y - this.ghosts[i].y) * this.rubberbandConst
+        + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
     }
   }
 };
