@@ -9,6 +9,7 @@ var Demon = function Demon(game, x, y) {
     10, false
   );
   this.animations.add('idle',  [43, 44, 45, 46], 12);
+  this.animations.add('victory',  [40], 0);
 
   this.anchor.setTo(.5, .75);
 
@@ -21,24 +22,25 @@ var Demon = function Demon(game, x, y) {
   this.walkSpeed = this.defaultWalkSpeed;
   this.isVictorious = false;
   this.starPower = false;
+  this.exiting = false;
 
   this.makeGhosts();
 
   this.emitter = this.game.add.emitter(0, 0, 100);
-  this.emitter.makeParticles('particle');
+  this.emitter.makeParticles('particle-big');
   //this.addChild(this.emitter);
   this.emitter.minParticleSpeed.setTo(-50, -50);
   this.emitter.maxParticleSpeed.setTo(50, -500);
   this.emitter.gravity = 50;
-  this.emitter.start(false, 2000, 10);
+  this.emitter.start(false, 1500, 10);
   this.emitter.on = false;
   this.emitter2 = this.game.add.emitter(0, 0, 100);
-  this.emitter2.makeParticles('particle');
+  this.emitter2.makeParticles('particle-big');
   //this.addChild(this.emitter);
   this.emitter2.minParticleSpeed.setTo(-50, -50);
   this.emitter2.maxParticleSpeed.setTo(50, -500);
   this.emitter2.gravity = 50;
-  this.emitter2.start(false, 2000, 10);
+  this.emitter2.start(false, 1500, 10);
   this.emitter2.on = false;
 };
 
@@ -59,45 +61,46 @@ Demon.prototype.constructor = Demon;
 
 Demon.prototype.update = function() {
   Phaser.Sprite.prototype.update.call(this);
+  if (!this.exiting) {
+    //Set star power particle emitters
+    if (this.starPower) {
+      switch (this.facing) {
+        case Phaser.UP:
+          this.emitter.emitX = this.x + 20;
+          this.emitter2.emitX = this.x - 20;
+          this.emitter.emitY = this.y + 25;
+          this.emitter2.emitY = this.y + 25;
+          break;
 
-  //Set star power particle emitters
-  if (this.starPower) {
-    switch (this.facing) {
-      case Phaser.UP:
-        this.emitter.emitX = this.x + 20;
-        this.emitter2.emitX = this.x - 20;
-        this.emitter.emitY = this.y + 25;
-        this.emitter2.emitY = this.y + 25;
-        break;
+        case Phaser.DOWN:
+          this.emitter.emitX = this.x + 20;
+          this.emitter2.emitX = this.x - 20;
+          this.emitter.emitY = this.y + 30;
+          this.emitter2.emitY = this.y + 30;
+          break;
 
-      case Phaser.DOWN:
-        this.emitter.emitX = this.x + 20;
-        this.emitter2.emitX = this.x - 20;
-        this.emitter.emitY = this.y + 30;
-        this.emitter2.emitY = this.y + 30;
-        break;
-
-      case Phaser.LEFT:
-      case Phaser.RIGHT:
-        this.emitter.emitX = this.x + 10;
-        this.emitter.emitY = this.y + 25;
-        this.emitter2.emitX = this.x - 10;
-        this.emitter2.emitY = this.y + 25;
-        break;
+        case Phaser.LEFT:
+        case Phaser.RIGHT:
+          this.emitter.emitX = this.x + 10;
+          this.emitter.emitY = this.y + 25;
+          this.emitter2.emitX = this.x - 10;
+          this.emitter2.emitY = this.y + 25;
+          break;
+      }
     }
-  }
 
-  // movement
-  if (this.alive && !this.isDying) {
-    if (this.game.physics.arcade.distanceToPointer(this) > 10) {
-      this.game.physics.arcade.moveToPointer(this, this.walkSpeed);
-      this.faceVelocity();
-    } else {
-      this.animations.play('idle');
-      this.body.velocity.x = 0;
-      this.body.velocity.y = 0;
+    // movement
+    if (this.alive && !this.isDying) {
+      if (this.game.physics.arcade.distanceToPointer(this) > 10) {
+        this.game.physics.arcade.moveToPointer(this, this.walkSpeed);
+        this.faceVelocity();
+      } else {
+        this.animations.play('idle');
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+      }
     }
-  }
+  };
 
   this.updateGhosts();
 };
@@ -124,26 +127,38 @@ Demon.prototype.makeGhosts = function() {
   // these must be added to the isogroup by the default state
   this.ghosts = [];
   for (var i = 0; i < this.game.difficulty; i++) {
-    this.ghosts.push(this.game.make.sprite(this.x, this.y, 'ghost', 0));
+    this.ghosts.push(this.game.make.sprite(this.x, this.y + (10 * (i + 1)), 'ghost', 0));
     this.ghosts[i].animations.add('default', [0, 1, 2, 3, 4], 12, true);
     this.ghosts[i].animations.play('default');
+    this.game.physics.arcade.enable(this.ghosts[i]);
   }
 };
 
 Demon.prototype.updateGhosts = function() {
   // super-lazy rubber-banding effect
-  if (this.ghosts.length > 0) {
-    this.ghosts[0].x += (this.x - this.ghosts[0].x) * this.rubberbandConst;
-    this.ghosts[0].y += (this.y - this.ghosts[0].y) * this.rubberbandConst;
-    for (var i = 1; i < this.ghosts.length; i++) {
-      this.ghosts[i].x +=
-        (this.ghosts[i - 1].x - this.ghosts[i].x) * this.rubberbandConst
-        + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
-      this.ghosts[i].y +=
-        (this.ghosts[i - 1].y - this.ghosts[i].y) * this.rubberbandConst
-        + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
-    }
+  //if (this.ghosts.length > 0) {
+  //  this.ghosts[0].x += (this.x - this.ghosts[0].x) * this.rubberbandConst;
+  //  this.ghosts[0].y += (this.y - this.ghosts[0].y) * this.rubberbandConst;
+  //  for (var i = 1; i < this.ghosts.length; i++) {
+  //    this.ghosts[i].x +=
+  //      (this.ghosts[i - 1].x - this.ghosts[i].x) * this.rubberbandConst
+  //      + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
+  //    this.ghosts[i].y +=
+  //      (this.ghosts[i - 1].y - this.ghosts[i].y) * this.rubberbandConst
+  //      + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
+  //  }
+  //}
+
+  var accelerationRate = this.defaultWalkSpeed * 4;
+  var maxSpeed = this.defaultWalkSpeed;
+
+  //this.game.physics.arcade.moveToObject(this.ghosts[0], this, this.defaultWalkSpeed * .9);
+  this.game.physics.arcade.accelerateToObject(this.ghosts[0], this, accelerationRate * .9, maxSpeed * .9, maxSpeed * .9);
+    
+  for (var i = 1; i < this.ghosts.length; i++) {
+    this.game.physics.arcade.accelerateToObject(this.ghosts[i], this.ghosts[i-1], accelerationRate * i, maxSpeed * i, maxSpeed * i);
   }
+  
 };
 
 Demon.prototype.toggleStarPower = function(enabled) {
@@ -151,3 +166,10 @@ Demon.prototype.toggleStarPower = function(enabled) {
   this.emitter.on = enabled;
   this.emitter2.on = enabled;
 };
+
+Demon.prototype.exitStance = function () {
+  this.animations.play('victory');
+  this.exiting = true;
+  this.body.velocity.x = 0;
+  this.body.velocity.y = 0;
+}
