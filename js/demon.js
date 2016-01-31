@@ -59,28 +59,30 @@ Demon.prototype.update = function() {
 
   //Set star power particle emitters
   if (this.starPower) {
-   switch (this.facing) {
-     case Phaser.UP:
-       this.emitter.emitX = this.x + 20;
-       this.emitter2.emitX = this.x - 20;
-       this.emitter.emitY = this.y + 25;
-       this.emitter2.emitY = this.y + 25;
-       break;
-     case Phaser.DOWN:
-       this.emitter.emitX = this.x + 20;
-       this.emitter2.emitX = this.x - 20;
-       this.emitter.emitY = this.y + 30;
-       this.emitter2.emitY = this.y + 30;
-       break;
-     case Phaser.LEFT:
-     case Phaser.RIGHT:
-       this.emitter.emitX = this.x + 10;
-       this.emitter.emitY = this.y + 25;
-       this.emitter2.emitX = this.x - 10;
-       this.emitter2.emitY = this.y + 25;
-       break;
-   }
- }
+    switch (this.facing) {
+      case Phaser.UP:
+        this.emitter.emitX = this.x + 20;
+        this.emitter2.emitX = this.x - 20;
+        this.emitter.emitY = this.y + 25;
+        this.emitter2.emitY = this.y + 25;
+        break;
+
+      case Phaser.DOWN:
+        this.emitter.emitX = this.x + 20;
+        this.emitter2.emitX = this.x - 20;
+        this.emitter.emitY = this.y + 30;
+        this.emitter2.emitY = this.y + 30;
+        break;
+
+      case Phaser.LEFT:
+      case Phaser.RIGHT:
+        this.emitter.emitX = this.x + 10;
+        this.emitter.emitY = this.y + 25;
+        this.emitter2.emitX = this.x - 10;
+        this.emitter2.emitY = this.y + 25;
+        break;
+    }
+  }
 
   // movement
   if (this.alive && !this.isDying) {
@@ -99,9 +101,6 @@ Demon.prototype.update = function() {
 
 Demon.prototype.kill = function() {
   if (!this.isDying && this.alive) {
-    BaseSprite.prototype.kill.call(this);
-    this.animations.play('dead');
-    this.rubberbandConst = -0.08;
     this.body.velocity.x = 0;
     this.body.velocity.y = 0;
     this.isDying = true;
