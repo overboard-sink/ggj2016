@@ -30,7 +30,7 @@ DefaultState.prototype.create = function create() {
     new SpeedPellet(this.game, this.demon),
     new PowerPellet(this.game, this.demon),
   ];
-  this.powerups.forEach(function(powerup) {
+  this.powerups.forEach(function (powerup) {
     this.isoGroup.add(powerup);
   }, this);
   this.lastPowerup = null;
@@ -67,11 +67,15 @@ DefaultState.prototype.update = function update() {
   this.game.physics.arcade.overlap(this.demon, this.monasticOrder.children,
   function (demon, monk) {
     if (_this.demon.alive) {
-      _this.demon.kill();
-      _this.demon.visible = true;
-      _this.game.time.events.add(1500, function () {
-        _this.game.state.start('score');
-      });
+      if (_this.demon.starPower) {
+        monk.kill();
+      } else {
+        _this.demon.kill();
+        _this.demon.visible = true;
+        _this.game.time.events.add(1500, function () {
+          _this.game.state.start('score');
+        });
+      }
     }
   });
 
@@ -108,7 +112,7 @@ DefaultState.prototype.render = function render() {
 
     this.game.debug.body(this.demon);
     this.game.debug.body(this.door);
-    this.symbol.children.forEach(function(child) {
+    this.symbol.children.forEach(function (child) {
       child &&
       this.game.debug.body(child);
     });
@@ -127,11 +131,11 @@ DefaultState.prototype.destroy = function destroy() {
   this.game.time.events.remove(this.powerupTimer);
 };
 
-DefaultState.prototype.spawnPowerup = function() {
+DefaultState.prototype.spawnPowerup = function () {
   console.log('Trying to spawn powerup...');
-  if (Math.random() > .5 && (!this.lastPowerup || !this.lastPowerup.alive)) {
-    var i = (this.powerups.length * Math.random()) | 0;
-    this.lastPowerup = this.powerups[i];
-    this.lastPowerup.resetRandom();
-  }
+  //if (Math.random() > .5 && (!this.lastPowerup || !this.lastPowerup.alive)) {
+  var i = 1;//(this.powerups.length * Math.random()) | 0;
+  this.lastPowerup = this.powerups[i];
+  this.lastPowerup.resetRandom();
+  //}
 };

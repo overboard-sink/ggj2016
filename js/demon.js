@@ -17,8 +17,27 @@ var Demon = function Demon(game, x, y) {
   this.defaultWalkSpeed = 200;
   this.walkSpeed = this.defaultWalkSpeed;
   this.isVictorious = false;
+  this.starPower = false;
 
   this.makeGhosts();
+
+  this.emitter = this.game.add.emitter(0, 0, 100);
+  this.emitter.makeParticles('particle');
+  //this.addChild(this.emitter);
+  this.emitter.minParticleSpeed.setTo(-50, -50);
+  this.emitter.maxParticleSpeed.setTo(50, -500);
+  this.emitter.gravity = 50;
+  this.emitter.start(false, 2000, 10);
+  this.emitter.on = false;
+
+  this.emitter2 = this.game.add.emitter(0, 0, 100);
+  this.emitter2.makeParticles('particle');
+  //this.addChild(this.emitter);
+  this.emitter2.minParticleSpeed.setTo(-50, -50);
+  this.emitter2.maxParticleSpeed.setTo(50, -500);
+  this.emitter2.gravity = 50;
+  this.emitter2.start(false, 2000, 10);
+  this.emitter2.on = false;
 };
 
 Demon.preload = function preload(game) {
@@ -38,6 +57,31 @@ Demon.prototype.constructor = Demon;
 
 Demon.prototype.update = function() {
   Phaser.Sprite.prototype.update.call(this);
+
+  //Set star power particle emitters
+  if (this.starPower) {
+    switch (this.facing) {
+      case Phaser.UP:
+        this.emitter.emitX = this.x + 20;
+        this.emitter2.emitX = this.x - 20;
+        this.emitter.emitY = this.y + 25;
+        this.emitter2.emitY = this.y + 25;
+        break;
+      case Phaser.DOWN:
+        this.emitter.emitX = this.x + 20;
+        this.emitter2.emitX = this.x - 20;
+        this.emitter.emitY = this.y + 30;
+        this.emitter2.emitY = this.y + 30;
+        break;
+      case Phaser.LEFT:
+      case Phaser.RIGHT:
+        this.emitter.emitX = this.x + 10;
+        this.emitter.emitY = this.y + 25;
+        this.emitter2.emitX = this.x - 10;
+        this.emitter2.emitY = this.y + 25;
+        break;
+    }
+  }
 
   // movement
   if (this.alive) {
@@ -88,4 +132,10 @@ Demon.prototype.updateGhosts = function() {
         + ((Math.random() - 0.5) * this.rubberbandConst * 2.0);
     }
   }
+};
+
+Demon.prototype.toggleStarPower = function (enabled) {
+  this.starPower = enabled;  
+  this.emitter.on = enabled;
+  this.emitter2.on = enabled;
 };

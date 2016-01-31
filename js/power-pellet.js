@@ -8,6 +8,10 @@ PowerPellet.preload = function(game) {
 
 PowerPellet.prototype = Object.create(BasePowerup.prototype);
 
-// TODO: .activate()
+PowerPellet.prototype.activate = function () {
+  this.demon.toggleStarPower(true);
+};
 
-// TODO: .deactive()
+PowerPellet.prototype.deactivate = function () {
+  this.demon.toggleStarPower(false);
+};
