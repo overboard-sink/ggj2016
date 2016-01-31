@@ -1,0 +1,23 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#main {
+  margin: auto;
+  width: auto;
+  height: 100%;
+}
+
+#main canvas {
+  margin: auto;
+}

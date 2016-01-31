@@ -18,14 +18,14 @@ var Torch = function Torch(game, x, y) {
   this.emitter.minParticleSpeed.setTo(-15, -20);
   this.emitter.maxParticleSpeed.setTo(15, -80);
   this.emitter.gravity = 0;
-  
+
   this.anchor.setTo(.5, .9);
 
 };
 
 Torch.preload = function preload(game) {
   game.load.spritesheet(
-    'torch', '/img/torch.png',
+    'torch', '/img/tower_wide.png',
     TILE_W * 2,
     TILE_H * 4
   );

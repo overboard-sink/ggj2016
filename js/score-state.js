@@ -23,7 +23,7 @@ ScoreState.prototype.create = function create() {
   var i = 0;
   var j = 0;
   var k = 0;
-  var time = (ghostTime / this.game.difficulty) | 0;
+  var time = this.game.difficulty < 10 ? 250 : 100;
 
   function nextGhost() {
     var x = j * spacingX + offsetX;
@@ -44,7 +44,7 @@ ScoreState.prototype.create = function create() {
     if (i < this.game.difficulty) {
       this.game.time.events.add(time, nextGhost);
     } else {
-      this.game.time.events.add(finalTimeout, function () {
+      this.game.time.events.add(finalTimeout, function() {
         this.game.difficulty = 0;
         this.game.state.start('default');
       });

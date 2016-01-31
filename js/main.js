@@ -33,6 +33,9 @@ function main() {
     },
 
     create: function create() {
+      game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      game.antialias = false;
+
       game.difficulty = 0;
       game.levelGenerator = new LevelGenerator(game);
 
