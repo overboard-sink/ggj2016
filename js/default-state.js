@@ -24,8 +24,13 @@ DefaultState.prototype.create = function create() {
   this.powerups = [
     new SpeedPellet(this.game, this.demon),
   ];
+  this.powerups.forEach(function(powerup) {
+    this.game.world.add(powerup);
+  }, this);
 
-  this.powerupTimer = this.game.time.events.add(10000, this.spawnPowerup, this);
+  // this.powerups[0].resetRandom();
+
+  // this.powerupTimer = this.game.time.events.add(1000, this.spawnPowerup, this);
 };
 
 DefaultState.prototype.update = function update() {
