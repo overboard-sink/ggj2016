@@ -32,6 +32,7 @@ function main() {
       game.load.image('score-bkg', '/img/score_screen.png');
       game.load.image('intro', '/img/title_screen.png');
       game.load.audio('drums', '/ogg/drums.ogg');
+      game.load.audio('eat', '/ogg/eat.ogg');
     },
 
     create: function create() {
