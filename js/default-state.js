@@ -37,7 +37,7 @@ DefaultState.prototype.create = function create() {
   this.door.open = false;
   this.game.physics.arcade.enable(this.door);
 
-  this.monasticOrder = new MonasticOrder(this.game, 4);
+  this.monasticOrder = new MonasticOrder(this.game, 4, this.demon);
   this.monasticOrder.children.forEach(function (monk) {
     this.isoGroup.add(monk);
   }, this);

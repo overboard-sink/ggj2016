@@ -20,14 +20,18 @@ BaseSprite.prototype.faceVelocity = function faceVelocity() {
   if (Math.abs(vel.x) > Math.abs(vel.y)) {
     if (vel.x > 0) {
       anim.play('right');
+      this.facing = Phaser.RIGHT;
     } else if (vel.x < 0) {
       anim.play('left');
+      this.facing = Phaser.LEFT;
     }
   } else if (Math.abs(vel.x) < Math.abs(vel.y)) {
     if (vel.y > 0) {
       anim.play('down');
+      this.facing = Phaser.DOWN;
     } else if (vel.y < 0) {
       anim.play('up');
+      this.facing = Phaser.UP;
     }
   }
 };

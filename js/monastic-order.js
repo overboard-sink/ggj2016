@@ -1,4 +1,4 @@
-var MonasticOrder = function MonasticOrder(game, numMonks) {
+var MonasticOrder = function MonasticOrder(game, numMonks, demon) {
   this.game = game;
   this.children = [];
 
@@ -11,15 +11,15 @@ var MonasticOrder = function MonasticOrder(game, numMonks) {
 
     switch ((Math.random() * 3) | 0) {
       case 0:
-        monk = new MonkStanding(game, x, y);
+        monk = new MonkStanding(game, x, y, demon);
         break;
 
       case 1:
-        monk = new MonkWalking(game, x, y);
+        monk = new MonkWalking(game, x, y, demon);
         break;
 
       case 2:
-        monk = new MonkChasing(game, x, y);
+        monk = new MonkChasing(game, x, y, demon);
         break;
     }
 

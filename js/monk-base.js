@@ -1,4 +1,4 @@
-var MonkBase = function MonkBase(game, x, y, key, frame) {
+var MonkBase = function MonkBase(game, x, y, key, frame, demon) {
   BaseSprite.call(this, game, x, y, key, frame);
 
   this.setupAnimations();
@@ -6,6 +6,8 @@ var MonkBase = function MonkBase(game, x, y, key, frame) {
   this.animations.play('down');
 
   this.game.physics.arcade.enable(this);
+  
+  this.demon = demon;
 };
 
 MonkBase.preload = function preload(game) {

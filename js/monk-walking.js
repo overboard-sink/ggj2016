@@ -1,5 +1,5 @@
-var MonkWalking = function MonkWalking(game, x, y) {
-  MonkBase.call(this, game, x, y, 'monk', 0);
+var MonkWalking = function MonkWalking(game, x, y, demon) {
+  MonkBase.call(this, game, x, y, 'monk', 0, demon);
 
   this.walking = false;
 
