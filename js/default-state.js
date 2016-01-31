@@ -23,13 +23,14 @@ DefaultState.prototype.create = function create() {
   // must happen after hydration because we need references to the demon
   this.powerups = [
     new SpeedPellet(this.game, this.demon),
+    new PowerPellet(this.game, this.demon),
   ];
   this.powerups.forEach(function(powerup) {
     this.isoGroup.add(powerup);
   }, this);
   this.lastPowerup = null;
 
-  this.powerupTimer = this.game.time.events.loop(5000, this.spawnPowerup, this);
+  this.powerupTimer = this.game.time.events.loop(6000, this.spawnPowerup, this);
 };
 
 DefaultState.prototype.update = function update() {
@@ -123,7 +124,8 @@ DefaultState.prototype.destroy = function destroy() {
 };
 
 DefaultState.prototype.spawnPowerup = function() {
-  if (!this.lastPowerup || !this.lastPowerup.alive) {
+  console.log('Trying to spawn powerup...');
+  if (Math.random() > .5 && (!this.lastPowerup || !this.lastPowerup.alive)) {
     var i = (this.powerups.length * Math.random()) | 0;
     this.lastPowerup = this.powerups[i];
     this.lastPowerup.resetRandom();

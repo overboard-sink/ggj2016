@@ -1,6 +1,6 @@
 var BaseSprite = function BaseSprite(game, x, y, key, frame) {
   Phaser.Sprite.call(this, game, x, y, key, frame);
-
+  this.effectTime = 3000;
   this.setupAnimations && this.setupAnimations();
 };
 

@@ -25,6 +25,7 @@ function main() {
       MonkBase.preload(game);
       Door.preload(game);
       SpeedPellet.preload(game);
+      PowerPellet.preload(game);
 
       // Other assets
       game.load.image('bkg', '/img/floor_full.png');

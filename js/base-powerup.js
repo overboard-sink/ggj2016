@@ -18,10 +18,13 @@ BasePowerup.prototype.constructor = BasePowerup;
  */
 BasePowerup.prototype.resetRandom = function() {
   console.log('spawned powerup');
+
+  var margin = 80;
+
   var tries = 0;
   do {
-    var x = Math.random() * GAME_W;
-    var y = Math.random() * GAME_H;
+    var x = Math.random() * (GAME_W - (margin * 2)) + margin;
+    var y = Math.random() * (GAME_H - (margin * 2)) + margin;
 
     tries++;
     if (tries > 500) {
@@ -41,13 +44,18 @@ BasePowerup.prototype.reset = function(x, y) {
   this.animations.play('default');
 };
 
+BasePowerup.prototype.setupAnimations = function() {
+  this.animations.add('default', [0], 8, true);
+};
+
 BasePowerup.prototype.update = function() {
   if (this.alive && game.physics.arcade.overlap(this, this.demon)) {
     this.activate();
+    this.game.time.events.add(3000, this.deactivate, this);
     this.kill();
   }
 };
 
-BasePowerup.prototype.activate = function() {
-  console.log('Powerup activated.');
-};
+BasePowerup.prototype.activate = function() { };
+
+BasePowerup.prototype.deactivate = function() { };
