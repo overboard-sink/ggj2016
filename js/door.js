@@ -1,7 +1,9 @@
 
 // ES6: class Door extends BaseSprite { ... }
-var Door = function Door(game, x, y) {
+var Door = function Door(game, x, y, demon) {
   BaseSprite.call(this, game, x, y, 'door', 0);
+
+  this.demon = demon;
 
   this.setupAnimations();
 
@@ -26,8 +28,15 @@ Door.prototype.setupAnimations = function setupAnimations() {
 };
 
 Door.prototype.update = function update() {
-  // ES6: super.update();
   BaseSprite.prototype.update.call(this);
+
+  if (this.isOpen) {
+    var _this = this;
+    this.game.physics.arcade.overlap(this, this.demon, function() {
+      _this.game.difficulty += 1;
+      _this.game.state.start('default');
+    });
+  }
 };
 
 Door.prototype.open = function open() {

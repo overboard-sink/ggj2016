@@ -39,6 +39,4 @@ function main() {
       game.state.start('default');
     },
   });
-
-  game.score = 0;
 }

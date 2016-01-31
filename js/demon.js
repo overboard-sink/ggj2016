@@ -12,10 +12,11 @@ var Demon = function Demon(game, x, y) {
   game.physics.arcade.enable(this);
   this.body.setSize(70, 75, 0, 20);
 
-  this.rubberbandConst = 0.02;
+  this.rubberbandConst = 0.04;
 
   this.defaultWalkSpeed = 200;
   this.walkSpeed = this.defaultWalkSpeed;
+  this.isVictorious = false;
 
   this.makeGhosts();
 };
@@ -56,6 +57,7 @@ Demon.prototype.update = function() {
 Demon.prototype.kill = function() {
   BaseSprite.prototype.kill.call(this);
   this.animations.play('dead');
+  this.rubberbandConst = -0.08;
 };
 
 Demon.prototype.setWalkSpeed = function(speed) {
@@ -65,7 +67,7 @@ Demon.prototype.setWalkSpeed = function(speed) {
 Demon.prototype.makeGhosts = function() {
   // these must be added to the isogroup by the default state
   this.ghosts = [];
-  for (var i = 0; i < this.game.score; i++) {
+  for (var i = 0; i < this.game.difficulty; i++) {
     this.ghosts.push(this.game.make.sprite(this.x, this.y, 'ghost', 0));
     this.ghosts[i].animations.add('default', [0, 1, 2, 3, 4], 12, true);
     this.ghosts[i].animations.play('default');
@@ -77,7 +79,7 @@ Demon.prototype.updateGhosts = function() {
   if (this.ghosts.length > 0) {
     this.ghosts[0].x += (this.x - this.ghosts[0].x) * this.rubberbandConst;
     this.ghosts[0].y += (this.y - this.ghosts[0].y) * this.rubberbandConst;
-    for (var i = 1; i < MAX_SCORE; i++) {
+    for (var i = 1; i < this.ghosts.length; i++) {
       this.ghosts[i].x +=
       (this.ghosts[i - 1].x - this.ghosts[i].x) * this.rubberbandConst;
       this.ghosts[i].y +=
