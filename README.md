@@ -17,7 +17,16 @@ Created for Global Game Jam 2016
 
 January 29-31, 2016 at the University of Missouri St. Louis
 
-[[https://raw.githubusercontent.com/overboard-sink/ggj2016/master/made_in_stlouis_devil_half_size.png|alt=Made in St. Louis!]]
+See more games at [STLGameJam.com](http://www.stlgamejam.com/)
+
+Special thanks to
+
+* [St. Louis Game Developer Co-Op](http://stlgamedev.com/)
+* [The University of Missouri St. Louis](http://www.umsl.edu/)
+* [The Global Game Jam](http://globalgamejam.org/)
+* And YOU for stopping by to play our game! **[PLAY IT NOW](https://overboard-sink.github.io/ggj2016/) ON LINE FROM ANY PLATFORM!**
+
+[[https://github.com/overboard-sink/ggj2016/blob/master/made_in_stlouis_devil_half_size.png]]
 
 
-Don't sue us, PETA!
+**Don't sue us, PETA!** We love our cats and dogs. No animals were harmed and/or sacrificed in this game. If you don't like demons eating animals, don't play this game.
