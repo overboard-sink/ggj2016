@@ -26,16 +26,13 @@ DefaultState.prototype.create = function create() {
     this.isoGroup.add(child);
   }, this);
 
-  this.monks = this.game.add.group();
-
   this.hintTrail = new ParticleTrail(this.game, 20, 20);
   this.game.world.add(this.hintTrail); this.hintTrail.begin();
   this.hintTrail.setTarget(this.symbol.children[0]);
 
-  this.door = game.add.sprite(80, 0, 'door_vert', 0);
-  this.door.alpha = 0.5;
-  this.door.open = false;
-  this.game.physics.arcade.enable(this.door);
+  this.door = new Door(this.game, 80, 0);
+  this.isoGroup.add(this.demon);
+  this.game.world.add(this.door);
 
   this.monasticOrder = new MonasticOrder(this.game, 4, this.demon);
   this.monasticOrder.children.forEach(function (monk) {
@@ -66,8 +63,8 @@ DefaultState.prototype.update = function update() {
 
   // open door
   if (this.symbol.isComplete()) {
-    this.door.open = true;
-    this.door.alpha = 1.0;
+    // NOTE: .open() is idempotent
+    this.door.open();
   }
 
   // demon gets hit by monks
@@ -83,8 +80,8 @@ DefaultState.prototype.update = function update() {
   });
 
   // exit room
-  if (this.door.open) {
-    this.game.physics.arcade.overlap(this.demon, this.door, function(a, b) {
+  if (this.door.isOpen) {
+    this.game.physics.arcade.overlap(this.demon, this.door, function() {
       if (Math.random() > .5)
         _this.game.state.start('default0');
       else
@@ -92,7 +89,7 @@ DefaultState.prototype.update = function update() {
     });
   }
 
-  //Custom sorting
+  // Custom sorting
   this.isoGroup.children.forEach(function (child) {
     child.sortValue = child.y + child.height - (child.anchor.y * child.height);
   });
