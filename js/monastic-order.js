@@ -6,9 +6,9 @@ var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
   
   var standingChance = .25;//1 - Math.min(difficulty * .10, .65);
   
-  var walkingChance = .25;//standingChance + (1 - Math.min(difficulty * .2, .65));
+  var walkingChance = .25 + standingChance;//standingChance + (1 - Math.min(difficulty * .2, .65));
 
-  var chasingChance = .25;//walkingChance + (1 - Math.min(difficulty * .2, .85));
+  var chasingChance = .25 + walkingChance;//walkingChance + (1 - Math.min(difficulty * .2, .85));
 
   for (var i = 0; i < numMonks; i++) {
     var monk;
