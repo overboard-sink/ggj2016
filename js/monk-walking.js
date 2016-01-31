@@ -17,6 +17,7 @@ MonkWalking.prototype.update = function update() {
 MonkWalking.prototype.changeWalk = function changeWalk() {
   this.walking = !this.walking;
 
+  // TODO: Don't walk outside the bounds
   var vel = this.body.velocity;
   if (this.walking) {
     switch ((Math.random() * 4) | 0) {

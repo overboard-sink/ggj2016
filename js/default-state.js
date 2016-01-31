@@ -10,22 +10,23 @@ DefaultState.prototype = Object.create(Phaser.State.prototype);
 DefaultState.prototype.constructor = DefaultState;
 
 DefaultState.prototype.create = function create() {
-  this.bkg = this.game.add.image(0, 0, 'bkg');  
-
-  this.isoGroup = this.game.add.group();
-
   Phaser.State.prototype.create.call(this);
 
+  this.bkg = this.game.add.image(0, 0, 'bkg');
+
+  // Iso group is used to ensure sprites are drawn with correct sort order.
+  this.isoGroup = this.game.add.group();
+
   this.demon = new Demon(this.game, 20, 20);
-  
-  this.isoGroup.add(this.demon)
-  
+  this.isoGroup.add(this.demon);
+
   this.symbol = new RitualSymbol(this.game, this.symbolId);
-  var _isoGroup = this.isoGroup;
 
   this.symbol.children.forEach(function (child) {
-    _isoGroup.add(child);
-  });
+    this.isoGroup.add(child);
+  }, this);
+
+  this.monks = this.game.add.group();
 
   this.hintTrail = new ParticleTrail(this.game, 20, 20);
   this.game.world.add(this.hintTrail); this.hintTrail.begin();
@@ -35,39 +36,48 @@ DefaultState.prototype.create = function create() {
   this.door.alpha = 0.5;
   this.door.open = false;
   this.game.physics.arcade.enable(this.door);
-  
-  this.testMonk = new MonkChasing(this.game, 120, 120);
-  this.isoGroup.add(this.testMonk);
+
+  this.monasticOrder = new MonasticOrder(this.game, 4);
+  this.monasticOrder.children.forEach(function (monk) {
+    this.isoGroup.add(monk);
+  }, this);
 };
 
 DefaultState.prototype.update = function update() {
   Phaser.State.prototype.update.call(this);
 
+  var _this = this;
+
   this.symbol.update();
 
-  var _this = this;
   // touching torches
-  this.game.physics.arcade.overlap(this.demon, this.symbol.children, function (a, b) {
-    if (!b.lit && (b.prevTorch == undefined || b.prevTorch.lit)) {
-      b.light();
-      if (b.nextTorch) {
-        _this.hintTrail.x = b.x + TILE_W;
-        _this.hintTrail.y = b.y + TILE_H * 2;
-        _this.hintTrail.setTarget(b.nextTorch);
+  this.game.physics.arcade.overlap(this.demon, this.symbol.children, function (demon, torch) {
+    if (!demon.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
+      torch.light();
+      if (torch.nextTorch) {
+        _this.hintTrail.x = torch.x;
+        _this.hintTrail.y = torch.y;
+        _this.hintTrail.setTarget(torch.nextTorch);
         _this.hintTrail.end();
         _this.hintTrail.begin();
       }
     }
   });
 
+  // open door
   if (this.symbol.isComplete()) {
     this.door.open = true;
     this.door.alpha = 1.0;
   }
 
+  // demon gets hit by monks
+  this.game.physics.arcade.overlap(this.demon, this.monasticOrder.children,
+  function (demon, monk) {
+    _this.game.state.restart();
+  });
+
   // exit room
   if (this.door.open) {
-    var _this = this;
     this.game.physics.arcade.overlap(this.demon, this.door, function(a, b) {
       if (Math.random() > .5)
         _this.game.state.start('default0');

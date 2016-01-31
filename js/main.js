@@ -1,5 +1,5 @@
-var GAME_WIDTH = 640;
-var GAME_HEIGHT = 1120;
+var GAME_W = 640;
+var GAME_H = 1120;
 var GAME_MAIN_ID = 'main';
 
 var TILE_W = 64;
@@ -14,7 +14,7 @@ var game;
  * Entry point
  */
 function main() {
-  game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, GAME_MAIN_ID, {
+  game = new Phaser.Game(GAME_W, GAME_H, Phaser.AUTO, GAME_MAIN_ID, {
     preload: function preload() {
 
       // Object-specific assets
