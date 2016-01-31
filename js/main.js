@@ -29,14 +29,15 @@ function main() {
 
       // Other assets
       game.load.image('bkg', '/img/floor_full.png');
-      game.load.image('intro', '/img/intro-screen.png');
+      game.load.image('score-bkg', '/img/score_screen.png');
+      game.load.image('intro', '/img/title_screen.png');
     },
 
     create: function create() {
       game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       game.antialias = false;
 
-      game.difficulty = 3;
+      game.difficulty = 2;
       game.levelGenerator = new LevelGenerator(game);
 
       game.state.add('intro', new IntroState());

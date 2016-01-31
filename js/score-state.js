@@ -8,6 +8,8 @@ ScoreState.prototype.constructor = ScoreState;
 
 ScoreState.prototype.create = function create() {
   Phaser.State.prototype.create.call(this);
+  
+  this.bkg = this.game.add.image(0, 0, 'score-bkg');
 
   var _this = this;
 

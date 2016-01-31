@@ -87,8 +87,11 @@ DefaultState.prototype.update = function update() {
   // exit room
   if (this.door.isOpen) {
     this.game.physics.arcade.overlap(this.demon, this.door, function () {
-      _this.game.difficulty += 1;
-      _this.game.state.start('default');
+      _this.demon.exitStance();
+      _this.game.time.events.add(1000, function () {
+        _this.game.difficulty += 1;
+        _this.game.state.start('default');
+      });      
     });
   }
 
