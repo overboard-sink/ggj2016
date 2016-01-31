@@ -18,6 +18,14 @@ DefaultState.prototype.create = function create() {
 
   //This function handles hydrating the demon, symbol, monasticOrder, and door properties
   this.game.levelGenerator.generate(this, this.game.difficulty, this.isoGroup);
+
+  // pre-generate powerups
+  // must happen after hydration because we need references to the demon
+  this.powerups = [
+    new SpeedPellet(this.game, this.demon),
+  ];
+
+  this.powerupTimer = this.game.time.events.add(10000, this.spawnPowerup, this);
 };
 
 DefaultState.prototype.update = function update() {
@@ -103,6 +111,13 @@ DefaultState.prototype.render = function render() {
   }
 };
 
-DefaultState.prototype.spawnPowerup = function() {
+DefaultState.prototype.destroy = function destroy() {
+  Phaser.Sprite.prototype.destroy.apply(this, arguments);
+  this.game.time.events.remove(this.powerupTimer);
+}
 
+DefaultState.prototype.spawnPowerup = function() {
+  var i = (this.powerups.length * Math.random()) | 0;
+  this.powerups[i].resetRandom();
+  this.powerupTimer = this.game.time.events.add(10000, this.spawnPowerup, this);
 };
