@@ -8,7 +8,7 @@ var Demon = function Demon(game, x, y) {
     [0, 0, 0, 0, 0, 0, 0, 32, 33, 34, 32, 33, 34, 32, 33, 34, 35, 36, 37, 38],
     10, false
   );
-  this.animations.add('idle', [45, 46, 47, 48], 12);
+  this.animations.add('idle', [45, 46, 47, 48], 8);
   var pow1 = this.animations.add('eat-powerup-0', [42, 44], 4);
   var pow2 = this.animations.add('eat-powerup-1', [43, 44], 4);
 
