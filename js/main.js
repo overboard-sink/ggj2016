@@ -29,16 +29,18 @@ function main() {
 
       // Other assets
       game.load.image('bkg', '/img/floor_full.png');
+      game.load.image('intro', '/img/intro-screen.png');
     },
 
     create: function create() {
       game.difficulty = 0;
       game.levelGenerator = new LevelGenerator(game);
 
+      game.state.add('intro', new IntroState());
       game.state.add('default', new DefaultState());
       game.state.add('score', new ScoreState());
 
-      game.state.start('default');
+      game.state.start('intro');
       // game.state.start('score');
     },
   });

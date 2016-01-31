@@ -44,7 +44,8 @@ ScoreState.prototype.create = function create() {
     if (i < this.game.difficulty) {
       this.game.time.events.add(time, nextGhost);
     } else {
-      this.game.time.events.add(finalTimeout, function() {
+      this.game.time.events.add(finalTimeout, function () {
+        this.game.difficulty = 0;
         this.game.state.start('default');
       });
     }

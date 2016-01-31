@@ -70,7 +70,6 @@ DefaultState.prototype.update = function update() {
       _this.demon.kill();
       _this.demon.visible = true;
       _this.game.time.events.add(1500, function () {
-        _this.game.difficulty = 0;
         _this.game.state.start('score');
       });
     }

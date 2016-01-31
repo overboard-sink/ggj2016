@@ -56,5 +56,5 @@ LevelGenerator.prototype.genDemon = function genDemon(difficulty) {
 };
 
 LevelGenerator.prototype.genDoor = function genDoor(difficulty) {
-  return new Door(this.game, GAME_W / 2, 0);
+  return new Door(this.game, GAME_W / 2, TILE_H / 2 );
 };

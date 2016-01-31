@@ -1,5 +1,5 @@
 var MonkRamming = function MonkRamming(game, x, y, demon) {
-  MonkBase.call(this, game, x, y, 'monk', 0, demon);
+  MonkBase.call(this, game, x, y, 'monk-rammer', 0, demon);
   
   this.chaseSpeed = 100;
   this.rammingDistance = 300;
