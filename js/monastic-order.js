@@ -17,7 +17,8 @@ var MonasticOrder = function MonasticOrder(game, difficulty, demon, door) {
       x = Math.random() * GAME_W;
       y = Math.random() * GAME_H;
     } while (this.game.physics.arcade.distanceToXY(demon, x, y) < 400 ||
-             this.game.physics.arcade.distanceToXY(door, x, y) < 250);
+             this.game.physics.arcade.distanceToXY(door, x, y) < 250 ||
+             y < TILE_H * 3);
 
     var dieRoll = Math.random();
 

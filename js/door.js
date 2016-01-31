@@ -15,7 +15,7 @@ var Door = function Door(game, x, y, demon) {
 };
 
 Door.preload = function preload(game) {
-  game.load.spritesheet('door', '/img/door_animation.png', TILE_W, TILE_H);
+  game.load.spritesheet('door', '/img/door_animation.png', TILE_W * 2, TILE_H * 2);
 };
 
 Door.prototype = Object.create(BaseSprite.prototype);

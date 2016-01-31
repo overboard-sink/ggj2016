@@ -133,9 +133,9 @@ DefaultState.prototype.destroy = function destroy() {
 
 DefaultState.prototype.spawnPowerup = function () {
   console.log('Trying to spawn powerup...');
-  if (Math.random() > .5 && (!this.lastPowerup || !this.lastPowerup.alive)) {
-    var i = (this.powerups.length * Math.random()) | 0;
+  //if (Math.random() > .5 && (!this.lastPowerup || !this.lastPowerup.alive)) {
+    var i = 1;//(this.powerups.length * Math.random()) | 0;
     this.lastPowerup = this.powerups[i];
     this.lastPowerup.resetRandom();
-  }
+  //}
 };

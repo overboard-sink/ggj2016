@@ -1,5 +1,9 @@
 var MonkBase = function MonkBase(game, x, y, key, frame, demon) {
-  this.deathAnimation = game.add.sprite(0, 0, 'monk-death', 0);
+  if (this instanceof MonkRamming) {
+    this.deathAnimation = game.add.sprite(0, 0, 'monk-rammer-death', 0);
+  } else {
+    this.deathAnimation = game.add.sprite(0, 0, 'monk-death', 0);
+  }
   this.deathAnimation.visible = false;
   this.deathAnimation.anchor.set(.5, .875);
 
@@ -20,6 +24,7 @@ MonkBase.preload = function preload(game) {
   game.load.spritesheet('monk', '/img/monk_walk.png', TILE_W, TILE_H);
   game.load.spritesheet('monk-rammer', '/img/monk_attack_walk.png', TILE_W, TILE_H);
   game.load.spritesheet('monk-death', '/img/monk_explode.png', TILE_W * 2, TILE_H * 2);
+  game.load.spritesheet('monk-rammer-death', '/img/monk_attack_explode.png', TILE_W * 2, TILE_H * 2);
 };
 
 MonkBase.prototype = Object.create(BaseSprite.prototype);

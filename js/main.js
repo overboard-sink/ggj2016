@@ -36,7 +36,7 @@ function main() {
       game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
       game.antialias = false;
 
-      game.difficulty = 0;
+      game.difficulty = 3;
       game.levelGenerator = new LevelGenerator(game);
 
       game.state.add('intro', new IntroState());
