@@ -19,6 +19,11 @@ DefaultState.prototype.create = function create() {
   //This function handles hydrating the demon, symbol, monasticOrder, and door properties
   this.game.levelGenerator.generate(this, this.game.difficulty, this.isoGroup);
 
+  // add the demon's ghosts to depth map
+  this.demon.ghosts.forEach(function (ghost) {
+    this.isoGroup.add(ghost);
+  }, this);
+
   // pre-generate powerups
   // must happen after hydration because we need references to the demon
   this.powerups = [

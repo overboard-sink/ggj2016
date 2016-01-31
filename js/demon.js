@@ -12,8 +12,12 @@ var Demon = function Demon(game, x, y) {
   game.physics.arcade.enable(this);
   this.body.setSize(70, 75, 0, 20);
 
+  this.rubberbandConst = 0.02;
+
   this.defaultWalkSpeed = 200;
   this.walkSpeed = this.defaultWalkSpeed;
+
+  this.makeGhosts();
 };
 
 Demon.preload = function preload(game) {
@@ -23,6 +27,8 @@ Demon.preload = function preload(game) {
     TILE_W * 2,
     TILE_H * 2
   );
+
+  game.load.spritesheet('ghost', '/img/tinyGhost.png', 16, 16);
 };
 
 Demon.prototype = Object.create(BaseSprite.prototype);
@@ -43,6 +49,8 @@ Demon.prototype.update = function() {
       this.body.velocity.y = 0;
     }
   }
+
+  this.updateGhosts();
 };
 
 Demon.prototype.kill = function() {
@@ -52,4 +60,28 @@ Demon.prototype.kill = function() {
 
 Demon.prototype.setWalkSpeed = function(speed) {
   this.walkSpeed = speed;
+};
+
+Demon.prototype.makeGhosts = function() {
+  // these must be added to the isogroup by the default state
+  this.ghosts = [];
+  for (var i = 0; i < this.game.score; i++) {
+    this.ghosts.push(this.game.make.sprite(this.x, this.y, 'ghost', 0));
+    this.ghosts[i].animations.add('default', [0, 1, 2, 3, 4], 12, true);
+    this.ghosts[i].animations.play('default');
+  }
+};
+
+Demon.prototype.updateGhosts = function() {
+  // super-lazy rubber-banding effect
+  if (this.ghosts.length > 0) {
+    this.ghosts[0].x += (this.x - this.ghosts[0].x) * this.rubberbandConst;
+    this.ghosts[0].y += (this.y - this.ghosts[0].y) * this.rubberbandConst;
+    for (var i = 1; i < MAX_SCORE; i++) {
+      this.ghosts[i].x +=
+      (this.ghosts[i - 1].x - this.ghosts[i].x) * this.rubberbandConst;
+      this.ghosts[i].y +=
+      (this.ghosts[i - 1].y - this.ghosts[i].y) * this.rubberbandConst;
+    }
+  }
 };

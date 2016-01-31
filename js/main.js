@@ -1,6 +1,7 @@
 var GAME_W = 640;
 var GAME_H = 1120;
 var GAME_MAIN_ID = 'main';
+var MAX_SCORE = 200;
 
 var TILE_W = 64;
 var TILE_H = 64;
@@ -38,4 +39,6 @@ function main() {
       game.state.start('default');
     },
   });
+
+  game.score = 0;
 }

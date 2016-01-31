@@ -1,3 +1,5 @@
+// jscs:disable
+
 var LevelGenerator = function LevelGenerator(game) {
   this.game = game;
 };
@@ -17,7 +19,7 @@ LevelGenerator.prototype.generate = function generate(state, difficulty, group) 
   state.symbol.children.forEach(function (child) {
     group.add(child);
   }, state);
-  
+
   group.add(state.demon);
 
   group.add(state.door);
@@ -27,7 +29,7 @@ LevelGenerator.prototype.generate = function generate(state, difficulty, group) 
   }, state);
 
   state.hintTrail = this.genHintTrail(difficulty, state.demon, state.symbol);
-  
+
 };
 
 LevelGenerator.prototype.genConstellation = function generate(difficulty) {
@@ -37,9 +39,9 @@ LevelGenerator.prototype.genConstellation = function generate(difficulty) {
 LevelGenerator.prototype.genHintTrail = function genHintTrail(difficulty, demon, symbol) {
   var trail = new ParticleTrail(this.game, demon);
   this.game.world.add(trail);
-  
+
   trail.pulseFrequency = difficulty < 10 ? difficulty : 10;
-  
+
   trail.resetTarget(symbol.children[0]);
 
   return trail;
