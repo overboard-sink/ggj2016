@@ -1,7 +1,7 @@
 var LevelData = {
   constellations: {
     0: {
-      overlay: '/img/ggj2016/overlay.png',
+      overlay: '/ggj2016/img/overlay.png',
       coords: [
         [250, 250],
         [500, 250],
@@ -10,7 +10,7 @@ var LevelData = {
     },
 
     1: {
-      overlay: '/img/ggj2016/overlay-1.png',
+      overlay: '/ggj2016/img/overlay-1.png',
       coords: [
         [250, 500],
         [500, 500],

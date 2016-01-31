@@ -26,7 +26,7 @@ var Torch = function Torch(game, x, y) {
 
 Torch.preload = function preload(game) {
   game.load.spritesheet(
-    'torch', '/img/ggj2016/tower_wide.png',
+    'torch', '/ggj2016/img/tower_wide.png',
     TILE_W * 2,
     TILE_H * 4
   );

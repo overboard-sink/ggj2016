@@ -64,12 +64,12 @@ var Demon = function Demon(game, x, y) {
 Demon.preload = function preload(game) {
   game.load.spritesheet(
     'demon',
-    '/img/ggj2016/demon_sheet.png',
+    '/ggj2016/img/demon_sheet.png',
     TILE_W * 2,
     TILE_H * 2
   );
 
-  game.load.spritesheet('ghost', '/img/ggj2016/tinyGhost.png', 16, 16);
+  game.load.spritesheet('ghost', '/ggj2016/img/tinyGhost.png', 16, 16);
 };
 
 Demon.prototype = Object.create(BaseSprite.prototype);

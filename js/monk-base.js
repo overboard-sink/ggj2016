@@ -21,10 +21,10 @@ var MonkBase = function MonkBase(game, x, y, key, frame, demon) {
 
 MonkBase.preload = function preload(game) {
   // TODO: move to base
-  game.load.spritesheet('monk', '/img/ggj2016/monk_walk.png', TILE_W, TILE_H);
-  game.load.spritesheet('monk-rammer', '/img/ggj2016/monk_attack_walk.png', TILE_W, TILE_H);
-  game.load.spritesheet('monk-death', '/img/ggj2016/monk_explode.png', TILE_W * 2, TILE_H * 2);
-  game.load.spritesheet('monk-rammer-death', '/img/ggj2016/monk_attack_explode.png', TILE_W * 2, TILE_H * 2);
+  game.load.spritesheet('monk', '/ggj2016/img/monk_walk.png', TILE_W, TILE_H);
+  game.load.spritesheet('monk-rammer', '/ggj2016/img/monk_attack_walk.png', TILE_W, TILE_H);
+  game.load.spritesheet('monk-death', '/ggj2016/img/monk_explode.png', TILE_W * 2, TILE_H * 2);
+  game.load.spritesheet('monk-rammer-death', '/ggj2016/img/monk_attack_explode.png', TILE_W * 2, TILE_H * 2);
   game.load.audio('scream', '/ggj2016/ogg/monk_fear.ogg');
 };
 

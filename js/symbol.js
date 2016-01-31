@@ -67,11 +67,11 @@ RitualSymbol = function (game, symbolId) {
 };
 
 RitualSymbol.preload = function (game) {
-  game.load.spritesheet('overlay-0', '/img/ggj2016/summon_pentagram.png',
+  game.load.spritesheet('overlay-0', '/ggj2016/img/summon_pentagram.png',
     TILE_W * 8, TILE_H * 8);
-  game.load.spritesheet('overlay-1', '/img/ggj2016/summon_archer.png',
+  game.load.spritesheet('overlay-1', '/ggj2016/img/summon_archer.png',
     TILE_W * 8, TILE_H * 8);
-  game.load.spritesheet('overlay-2', '/img/ggj2016/summon_spears.png',
+  game.load.spritesheet('overlay-2', '/ggj2016/img/summon_spears.png',
     TILE_W * 8, TILE_H * 8);
 
   game.load.audio('symbol', '/ggj2016/ogg/symbol.ogg');

@@ -28,9 +28,9 @@ function main() {
       PowerPellet.preload(game);
 
       // Other assets
-      game.load.image('bkg', '/img/ggj2016/floor_full.png');
-      game.load.image('score-bkg', '/img/ggj2016/score_screen.png');
-      game.load.image('intro', '/img/ggj2016/title_screen.png');
+      game.load.image('bkg', '/ggj2016/img/floor_full.png');
+      game.load.image('score-bkg', '/ggj2016/img/score_screen.png');
+      game.load.image('intro', '/ggj2016/img/title_screen.png');
       game.load.audio('drums', '/ggj2016/ogg/drums.ogg');
     },
 

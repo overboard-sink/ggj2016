@@ -3,7 +3,7 @@ var SpeedPellet = function SpeedPellet(game, demon) {
 };
 
 SpeedPellet.preload = function(game) {
-  game.load.spritesheet('speed-pellet', '/img/ggj2016/power_up_1.png', 27, 32);
+  game.load.spritesheet('speed-pellet', '/ggj2016/img/power_up_1.png', 27, 32);
 };
 
 SpeedPellet.prototype = Object.create(BasePowerup.prototype);
