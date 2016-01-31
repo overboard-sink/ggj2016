@@ -62,6 +62,8 @@ RitualSymbol = function (game, symbolId) {
     this.children.push(torch);
     prevTorch = torch;
   }
+
+  this.sfx = game.add.audio('symbol');
 };
 
 RitualSymbol.preload = function (game) {
@@ -71,12 +73,15 @@ RitualSymbol.preload = function (game) {
     TILE_W * 8, TILE_H * 8);
   game.load.spritesheet('overlay-2', '/img/summon_spears.png',
     TILE_W * 8, TILE_H * 8);
+
+  game.load.audio('symbol', '/ogg/symbol.ogg');
 }
 
 RitualSymbol.prototype.update = function () {
   if (this.isComplete() && !this.overlay.visible) {
     this.overlay.visible = true;
     this.overlay.animations.play('default');
+    this.sfx.play();
   }
 };
 

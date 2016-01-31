@@ -36,7 +36,7 @@ DefaultState.prototype.create = function create() {
   this.lastPowerup = null;
 
   this.powerupTimer = this.game.time.events.loop(6000, this.spawnPowerup, this);
-  this.bkgSfx = this.game.add.audio('drums').loopFull();
+  this.bkgSfx = this.game.add.audio('drums').play(null, 0, 1.0, true);
 };
 
 DefaultState.prototype.update = function update() {

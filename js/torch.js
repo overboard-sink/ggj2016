@@ -62,7 +62,9 @@ Torch.prototype.update = function update() {
 Torch.prototype.light = function light() {
   this.animations.play(TORCH_EXPLOSION);
   this.lit = true;
-  this.lightSfx.play();
+
+  if (this.nextTorch)
+    this.lightSfx.play();
 
   this.emitter.start(false, 1000, 50);
 };
