@@ -73,7 +73,13 @@ DefaultState.prototype.update = function update() {
   // demon gets hit by monks
   this.game.physics.arcade.overlap(this.demon, this.monasticOrder.children,
   function (demon, monk) {
-    _this.game.state.restart();
+    if (_this.demon.alive) {
+      _this.demon.kill();
+      _this.demon.visible = true;
+      _this.game.time.events.add(1500, function () {
+        _this.game.state.restart();
+      });
+    }
   });
 
   // exit room
