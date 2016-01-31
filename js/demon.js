@@ -12,7 +12,8 @@ var Demon = function Demon(game, x, y) {
   game.physics.arcade.enable(this);
   this.body.setSize(70, 75, 0, 20);
 
-  this.walkSpeed = 200;
+  this.defaultWalkSpeed = 200;
+  this.walkSpeed = this.defaultWalkSpeed;
 };
 
 Demon.preload = function preload(game) {

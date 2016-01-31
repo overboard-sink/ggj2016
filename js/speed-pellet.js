@@ -9,10 +9,9 @@ SpeedPellet.prototype.setupAnimations = function() {
 };
 
 SpeedPellet.prototype.activate = function() {
-  var oldSpeed = this.demon.walkSpeed;
-  this.demon.setWalkSpeed(oldSpeed * 2);
+  this.demon.setWalkSpeed(this.demon.defaultWalkSpeed * 2);
   this.game.time.events.add(5000, function() {
-    this.demon.setWalkSpeed(oldSpeed);
+    this.demon.setWalkSpeed(this.demon.defaultWalkSpeed);
   }, this);
 };
 

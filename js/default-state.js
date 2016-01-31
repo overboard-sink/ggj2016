@@ -27,10 +27,9 @@ DefaultState.prototype.create = function create() {
   this.powerups.forEach(function(powerup) {
     this.game.world.add(powerup);
   }, this);
+  this.lastPowerup = null;
 
-  // this.powerups[0].resetRandom();
-
-  // this.powerupTimer = this.game.time.events.add(1000, this.spawnPowerup, this);
+  this.powerupTimer = this.game.time.events.loop(10000, this.spawnPowerup, this);
 };
 
 DefaultState.prototype.update = function update() {
@@ -123,7 +122,9 @@ DefaultState.prototype.destroy = function destroy() {
 }
 
 DefaultState.prototype.spawnPowerup = function() {
-  var i = (this.powerups.length * Math.random()) | 0;
-  this.powerups[i].resetRandom();
-  this.powerupTimer = this.game.time.events.add(10000, this.spawnPowerup, this);
+  if (!this.lastPowerup || !this.lastPowerup.alive) {
+    var i = (this.powerups.length * Math.random()) | 0;
+    this.lastPowerup = this.powerups[i];
+    this.lastPowerup.resetRandom();
+  }
 };

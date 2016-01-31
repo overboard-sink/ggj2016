@@ -17,9 +17,17 @@ BasePowerup.prototype.constructor = BasePowerup;
  * inside it.
  */
 BasePowerup.prototype.resetRandom = function() {
+  console.log('spawned powerup');
+  var tries = 0;
   do {
     var x = Math.random() * GAME_W;
     var y = Math.random() * GAME_H;
+
+    tries++;
+    if (tries > 500) {
+      console.log('!!!');
+      break;
+    }
   } while (this.game.physics.arcade.distanceBetween(this, this.demon) < 400);
   this.reset(x, y);
 },
