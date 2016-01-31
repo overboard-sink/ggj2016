@@ -36,6 +36,7 @@ DefaultState.prototype.create = function create() {
   this.lastPowerup = null;
 
   this.powerupTimer = this.game.time.events.loop(6000, this.spawnPowerup, this);
+  this.bkgSfx = this.game.add.audio('drums').loopFull();
 };
 
 DefaultState.prototype.update = function update() {
@@ -46,7 +47,7 @@ DefaultState.prototype.update = function update() {
   this.symbol.update();
 
   if (this.symbol.symbolAnimationComplete && this.monasticOrder.active) {
-    this.monasticOrder.kill();    
+    this.monasticOrder.kill();
   }
 
   // touching torches
@@ -78,6 +79,7 @@ DefaultState.prototype.update = function update() {
         _this.demon.kill();
         _this.demon.visible = true;
         _this.game.time.events.add(2500, function () {
+          _this.bkgSfx.stop();
           _this.game.state.start('score');
         });
       }
@@ -90,8 +92,9 @@ DefaultState.prototype.update = function update() {
       _this.demon.exitStance();
       _this.game.time.events.add(1000, function () {
         _this.game.difficulty += 1;
+        _this.bkgSfx.stop();
         _this.game.state.start('default');
-      });      
+      });
     });
   }
 
