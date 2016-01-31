@@ -38,7 +38,7 @@ ParticleTrail.prototype.begin = function () {
   this.visible = true;  
 
   if (this.stopEvent)
-    this.stopEvent.timer.remove(this.timer);
+    this.stopEvent.timer.remove(this.stopEvent);
 
   this.stopEvent = this.game.time.events.add(Phaser.Timer.SECOND * 5, this.end, this);
 };

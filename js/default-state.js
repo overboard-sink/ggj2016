@@ -52,11 +52,11 @@ DefaultState.prototype.update = function update() {
 
   // touching torches
   this.game.physics.arcade.overlap(this.demon, this.symbol.children, function (demon, torch) {
-    if (!demon.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
+    if (!torch.lit && (torch.prevTorch == undefined || torch.prevTorch.lit)) {
       torch.light();
       if (torch.nextTorch) {
-        _this.hintTrail.x = torch.x;
-        _this.hintTrail.y = torch.y;
+        _this.hintTrail.x = torch.x + (torch.width / 2);
+        _this.hintTrail.y = torch.y + (torch.height / 2);
         _this.hintTrail.setTarget(torch.nextTorch);
         _this.hintTrail.end();
         _this.hintTrail.begin();
