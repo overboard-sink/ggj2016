@@ -38,8 +38,8 @@ function main() {
       game.state.add('default', new DefaultState());
       game.state.add('score', new ScoreState());
 
-      // game.state.start('default');
-      game.state.start('score');
+      game.state.start('default');
+      // game.state.start('score');
     },
   });
 }
