@@ -29,7 +29,7 @@ DefaultState.prototype.create = function create() {
   }, this);
   this.lastPowerup = null;
 
-  this.powerupTimer = this.game.time.events.loop(10000, this.spawnPowerup, this);
+  this.powerupTimer = this.game.time.events.loop(5000, this.spawnPowerup, this);
 };
 
 DefaultState.prototype.update = function update() {
