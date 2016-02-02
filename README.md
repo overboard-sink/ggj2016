@@ -1,17 +1,21 @@
-# DEMON TORCH
+DEMON TORCH
+===========
 
-You are a demon, you are sent by your master to light the flames of hell so that he may come back and conquire earth, but first you have to get past the monks, bruiser, and other holy warriors.
+You are a demon. You are sent by your master to light the flames of hell so that he may come back and conquer earth, but first you have to get past the monks, bruisers, and other holy warriors.
 
 Play as Pwom, the kitten-and-puppy-eating monk-slaying purple demon as you light the way for your dark master!
 
-## CREDITS
+CREDITS
+-------
 
-* Jason Charney - Character Development, Code, Audio, Programming
-* Loren Naegle - Programmer
-* Brad Harms - Programmer, Audio
-* Brandon Cramp - Sound Effects
-* Amanda Baker - Artist
-* Andrew Sallwasser - Artist, Colorist
+*Alphabetical by last name:*
+
+-	Amanda Baker - Art
+-	Jason Charney - Design
+-	Brandon Crump - Audio
+-	Brad Harms - Code, Audio
+-	Loren Naegle - Code
+-	Andrew Sallwasser - Art
 
 **Created for Global Game Jam 2016**
 
@@ -21,10 +25,10 @@ See more games at [STLGameJam.com](http://www.stlgamejam.com/)
 
 Special thanks to
 
-* [St. Louis Game Developer Co-Op](http://stlgamedev.com/)
-* [The University of Missouri St. Louis](http://www.umsl.edu/)
-* [The Global Game Jam](http://globalgamejam.org/)
-* And YOU for stopping by to play our game! **[PLAY IT NOW](https://overboard-sink.github.io/ggj2016/) ON LINE FROM ANY PLATFORM!**
+-	[St. Louis Game Developer Co-Op](http://stlgamedev.com/)
+-	[The University of Missouri St. Louis](http://www.umsl.edu/)
+-	[The Global Game Jam](http://globalgamejam.org/)
+-	And YOU for stopping by to play our game! **[PLAY IT NOW](https://overboard-sink.github.io/ggj2016/) ON LINE FROM ANY PLATFORM!**
 
 ![Made in St. Louis!](https://raw.githubusercontent.com/overboard-sink/ggj2016/master/made_in_stlouis_devil_half_size.png)
 
